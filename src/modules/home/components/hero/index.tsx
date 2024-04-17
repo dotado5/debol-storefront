@@ -31,17 +31,15 @@ const Hero = async ({
         icon: <MdEmail className="text-[#1E854C]" />,
       },
       {
-        title: "WhatsApp: 090234555",
+        title: "WhatsApp: +372 53851546",
         icon: <FaWhatsapp className="text-[#1E854C]" />,
       },
       {
-        title: "Location: Tallinn, J. Sutiste tee 30, 13411",
+        title: "Location: Mustamäe tee 12, Tallinn (inside Maxima building)",
         icon: <FaLocationDot className="text-[#1E854C]" />,
       },
     ],
   }
-
-  // console.log(collections)
 
   return (
     <div className=" w-full border-ui-border-base medium:relative bg-ui-bg-subtle">
@@ -51,7 +49,7 @@ const Hero = async ({
           <BannerSlider collections={collections} />
           {/* Additional content here */}
         </div>
-        <div className="lg:ml-4 flex-1 w-56 customCard">
+        <div className="lg:ml-2 w-56 customCard">
           <CustomCard
             title={companyInfo.title}
             contentIcon={companyInfo.contentIcon}

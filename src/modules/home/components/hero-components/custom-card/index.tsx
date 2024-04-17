@@ -38,8 +38,8 @@ export const CustomCard: React.FC<CardProps> = ({
 
 export const BonusCard = () => {
   return (
-    <div className="bonusCard flex">
-      <div className="w-[50%] z-[10000001]">
+    <div className="bonusCard flex w-[300px] medium:w-full">
+      <div className="z-[10000001]">
         <Image src={whiteLogo} alt={""} width={100} height={50} />
         <h1 className="text-xl p-0 text-white font-bold ml-1">Africa & Asia</h1>
         <h4 className="text-white font-bold ml-1 text-sm">Store</h4>

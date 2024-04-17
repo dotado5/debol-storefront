@@ -18,22 +18,22 @@ import tuber from "assets/collection-icons/slice.svg"
 import fresh from "assets/collection-icons/ready-meal.svg"
 
 export const Icons = [
+  attire,
+  noodles,
+  drink,
   vegetables,
   oil,
   flour,
-  noodles,
-  attire,
   attachment,
   accessories,
   tea,
+  other,
   snacks,
   beverages,
-  other,
   asian,
   frozen,
   seasoning,
   grains,
-  drink,
   tuber,
   fresh,
 ]

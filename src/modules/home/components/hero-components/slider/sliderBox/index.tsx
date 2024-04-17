@@ -21,15 +21,17 @@ const index = ({
   // console.log(textColor)
   return (
     <div className={`${className}`}>
-      <div className="absolute z-[10000001] flex flex-col items-start w-[450px] top-[20%] gap-2 ml-[6em]">
-        <h1 className={` text-${textColor} text-6xl text-left`}>{title}</h1>
+      <div className="absolute z-[10000001] flex flex-col items-start w-[350px] md:w-[450px] top-[20%] gap-2 ml-[3em] md:ml-[6em]">
+        <h1 className={` text-${textColor} text-2xl medium:text-6xl text-left`}>
+          {title}
+        </h1>
         <h2
-          className={`z-[10000001]text-[16px] medium:text-2xl font-semibold text-${textColor}`}
+          className={`z-[10000001] text-[16px] medium:text-2xl font-semibold text-${textColor}`}
         >
           {description}
         </h2>
         <button
-          className={`${buttonClassName} border-r-4 border-b-4 z-[10000001] text-3xl py-2 px-9`}
+          className={`${buttonClassName} border-r-4 border-b-4 z-[10000001] text-xl medium:text-3xl py-2 px-9`}
         >
           {buttonContent}
         </button>
