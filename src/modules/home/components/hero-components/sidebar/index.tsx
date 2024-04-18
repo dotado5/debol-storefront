@@ -34,7 +34,7 @@ const Sidebar = ({
     <aside className="w-60 sidebar" aria-label="Sidebar">
       <div className="overflow-y-auto py-4 px-3 shadow-md bg-white rounded dark:bg-gray-800 h-[462px] mr-[10px] sidebar">
         <ul className="space-y-2 grid grid-cols-2 medium:grid-cols-1">
-          {collections.slice(0, 9).map((collection, index) => (
+          {collections.slice(18, 9).map((collection, index) => (
             <li
               key={collection.title}
               onMouseEnter={() => {
@@ -79,7 +79,7 @@ const Sidebar = ({
 
           {other && (
             <ul className="pl-4 medium:grid-cols-1 w-60 absolute left-[15em] top-0 bg-white h-[59vh] z-[10000] subCategories hidden medium:grid ">
-              {collections.slice(9, 18).map((collection, index) => (
+              {collections.slice(9, 0).map((collection, index) => (
                 <LocalizedClientLink
                   href={`/collections/${collection.handle}`}
                   className=" items-center p-2 text-xs font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 category relative hidden medium:flex w-44 gap-2"
