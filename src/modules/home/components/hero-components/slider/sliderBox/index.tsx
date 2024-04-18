@@ -11,11 +11,11 @@ const index = ({
   className,
 }: {
   image: any
-  description: string
-  title: string
+  description: any
+  title: any
   textColor: string
   buttonClassName: string
-  buttonContent: string
+  buttonContent: any
   className: string
 }) => {
   // console.log(textColor)
