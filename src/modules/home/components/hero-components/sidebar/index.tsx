@@ -8,6 +8,7 @@ import { ProductCollectionWithPreviews } from "types/global"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import { Icons } from "../icons"
 import Image from "next/image"
+import TranslationComponent from "@modules/Translator/component/translation"
 
 export interface Category {
   name: string
@@ -48,7 +49,7 @@ const Sidebar = ({
                 className=" items-center p-2 text-xs font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 gap-2 category relative hidden medium:flex"
               >
                 <Image src={Icons[index]} alt={""} width={20} height={20} />
-                {collection.title}
+                <TranslationComponent query={collection.title} />
               </LocalizedClientLink>
 
               {/* for mobile */}
@@ -58,7 +59,7 @@ const Sidebar = ({
               >
                 {/* <img src={category.icon} alt="" className="w-4" /> */}
                 <Image src={Icons[index]} alt={""} width={20} height={20} />
-                {collection.title}
+                <TranslationComponent query={collection.title} />
                 {/* <MdArrowDropDown
                   className={`hidden dropdownArrow absolute right-[2em]`}
                 /> */}
@@ -91,7 +92,7 @@ const Sidebar = ({
                     width={20}
                     height={20}
                   />
-                  {collection.title}
+                  <TranslationComponent query={collection.title} />
                   <MdArrowDropDown
                     className={`hidden dropdownArrow absolute right-[2em]`}
                   />
@@ -104,11 +105,11 @@ const Sidebar = ({
             onClick={() => setOther(!other)}
           >
             <Image src={Icons[9]} alt={""} width={20} height={20} />
-            Other Collections
+            <TranslationComponent query={"Other Collections"} />
           </p>
           <p className="flex items-center p-2 text-sm font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 gap-2 category relative small:hidden medium:hidden">
             <Image src={Icons[9]} alt={""} width={20} height={20} />
-            Other Collections
+            <TranslationComponent query={"Other Collections"} />
           </p>
         </ul>
       </div>

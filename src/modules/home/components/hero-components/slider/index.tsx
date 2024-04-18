@@ -13,6 +13,7 @@ import vegetablesAdSpices from "assets/slidesImages/vegetablesAndSpices.svg"
 import cassavaFlakes from "assets/slidesImages/cassaveFlakes.svg"
 import legumes from "assets/slidesImages/legumes.svg"
 import SliderBox from "./sliderBox"
+import TranslationComponent from "@modules/Translator/component/translation"
 
 const BannerSlider = ({
   collections,
@@ -22,47 +23,55 @@ const BannerSlider = ({
   const slides = [
     {
       image: meat,
-      title: "Estonia's Destination",
-      description: "for Authentic African Store",
+      title: <TranslationComponent query={"Estonia's Destination"} />,
+      description: (
+        <TranslationComponent query={"for Authentic African Store"} />
+      ),
       textColor: "black",
       buttonClassName: "border-white bg-[#FF4C25] text-white",
-      buttonContent: "SHOP NOW",
+      buttonContent: <TranslationComponent query={"SHOP NOW"} />,
       className: "slider1",
     },
     {
       image: fruits,
-      title: "African Delights Await",
-      description: "Order Now for Delivery in Estonia",
+      title: <TranslationComponent query={"African Delights Await"} />,
+      description: (
+        <TranslationComponent query={"Order Now for Delivery in Estonia"} />
+      ),
       textColor: "white",
       buttonClassName: "border-white bg-[#F3D044] text-[#415315]",
-      buttonContent: "SHOP NOW",
+      buttonContent: <TranslationComponent query={"SHOP NOW"} />,
       className: "slider2",
     },
     {
       image: vegetablesAdSpices,
-      title: "SAVOUR THE SPICE",
-      description: "Order Now for Delivery in Estonia",
+      title: <TranslationComponent query={"SAVOUR THE SPICE"} />,
+      description: (
+        <TranslationComponent query={"Order Now for Delivery in Estonia"} />
+      ),
       textColor: "[#FF4C25]",
       buttonClassName: "border-[#E7E9E7] bg-[#A7D3B5] text-[#415315]",
-      buttonContent: "Unlock New Tastes",
+      buttonContent: <TranslationComponent query={"Unlock New Tastes"} />,
       className: "slider3",
     },
     {
       image: cassavaFlakes,
-      title: "ESTONIA'S GATEWAY",
-      description: "TO AFRICAN GASTRONOMY",
+      title: <TranslationComponent query={"ESTONIA'S GATEWAY"} />,
+      description: <TranslationComponent query={"TO AFRICAN GASTRONOMY"} />,
       textColor: "white",
       buttonClassName: "border-[#A7D3B5] bg-[#E0D8CC] text-[#415315]",
-      buttonContent: "Unlock New Tastes",
+      buttonContent: <TranslationComponent query={"Unlock New Tastes"} />,
       className: "slider4",
     },
     {
       image: legumes,
-      title: "IGNITE YOUR TASTE BUDS WITH",
-      description: "Authentic African Food in Estonia",
+      title: <TranslationComponent query={"IGNITE YOUR TASTE BUDS WITH"} />,
+      description: (
+        <TranslationComponent query={"Authentic African Food in Estonia"} />
+      ),
       textColor: "[#FF4C25]",
       buttonClassName: "border-[#E0D8CC] bg-[#F3D044] text-[#415315]",
-      buttonContent: "SHOP NOW",
+      buttonContent: <TranslationComponent query={"SHOP NOW"} />,
       className: "slider5",
     },
   ]
