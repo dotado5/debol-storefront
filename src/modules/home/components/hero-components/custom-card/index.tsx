@@ -23,7 +23,7 @@ export const CustomCard: React.FC<CardProps> = ({
   contentIcon,
 }) => {
   return (
-    <div className="bg-white shadow-lg rounded-2xl p-6 w-full md:w-auto mb-4">
+    <div className="bg-[#f5f6f4] shadow-lg rounded-2xl p-6 w-full md:w-auto mb-4">
       <h2 className="text-sm font-semibold mb-4">{title}</h2>
       {contentIcon &&
         contentIcon.map((item, index) => (
@@ -53,6 +53,8 @@ export const BonusCard = () => {
           src={advertWoman}
           alt={""}
           className="medium:mt-[43%] ml-0 rounded-br-2xl"
+          width={400}
+          height={400}
         />
       </div>
     </div>

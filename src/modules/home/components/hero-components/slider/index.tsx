@@ -31,6 +31,7 @@ const BannerSlider = ({
       buttonClassName: "border-white bg-[#FF4C25] text-white",
       buttonContent: <TranslationComponent query={"SHOP NOW"} />,
       className: "slider1",
+      path: "/collections/frozen_foods",
     },
     {
       image: fruits,
@@ -42,6 +43,7 @@ const BannerSlider = ({
       buttonClassName: "border-white bg-[#F3D044] text-[#415315]",
       buttonContent: <TranslationComponent query={"SHOP NOW"} />,
       className: "slider2",
+      path: "/collections/fruits_vegetables",
     },
     {
       image: vegetablesAdSpices,
@@ -53,6 +55,7 @@ const BannerSlider = ({
       buttonClassName: "border-[#E7E9E7] bg-[#A7D3B5] text-[#415315]",
       buttonContent: <TranslationComponent query={"Unlock New Tastes"} />,
       className: "slider3",
+      path: "/collections/seasoning_spices",
     },
     {
       image: cassavaFlakes,
@@ -62,6 +65,7 @@ const BannerSlider = ({
       buttonClassName: "border-[#A7D3B5] bg-[#E0D8CC] text-[#415315]",
       buttonContent: <TranslationComponent query={"Unlock New Tastes"} />,
       className: "slider4",
+      path: "/collections/tubers_plantains",
     },
     {
       image: legumes,
@@ -73,20 +77,9 @@ const BannerSlider = ({
       buttonClassName: "border-[#E0D8CC] bg-[#F3D044] text-[#415315]",
       buttonContent: <TranslationComponent query={"SHOP NOW"} />,
       className: "slider5",
+      path: "/collections/beans_grains",
     },
   ]
-
-  // const slides = [
-  //   {
-  //     image: vegetablesAdSpices,
-  //     title: "SAVOUR THE SPICE",
-  //     description: "Order Now for Delivery in Estonia",
-  //     textColor: "[#FF4C25]",
-  //     buttonClassName: "border-[#E7E9E7] bg-[#A7D3B5] text-[#415315]",
-  //     buttonContent: "Unlock New Tastes",
-  //     className: "slider3",
-  //   },
-  // ]
 
   return (
     <div>
@@ -115,6 +108,7 @@ const BannerSlider = ({
               buttonClassName={slide.buttonClassName}
               buttonContent={slide.buttonContent}
               className={slide.className}
+              path={slide.path}
             />
           </SwiperSlide>
         ))}

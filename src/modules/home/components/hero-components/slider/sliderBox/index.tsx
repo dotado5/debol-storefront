@@ -1,4 +1,5 @@
 import Image from "next/image"
+import { useRouter } from "next/navigation"
 import React from "react"
 
 const index = ({
@@ -9,6 +10,7 @@ const index = ({
   buttonClassName,
   buttonContent,
   className,
+  path,
 }: {
   image: any
   description: any
@@ -17,7 +19,13 @@ const index = ({
   buttonClassName: string
   buttonContent: any
   className: string
+  path: string
 }) => {
+  const Router = useRouter()
+
+  const Redirect = (path: string) => {
+    Router.push(path)
+  }
   // console.log(textColor)
   return (
     <div className={`${className}`}>
@@ -32,6 +40,10 @@ const index = ({
         </h2>
         <button
           className={`${buttonClassName} border-r-4 border-b-4 z-[10000001] text-xl medium:text-3xl py-2 px-9`}
+          onClick={(e) => {
+            e.preventDefault()
+            Redirect(path)
+          }}
         >
           {buttonContent}
         </button>

@@ -49,7 +49,7 @@ const Hero = async ({
           <BannerSlider collections={collections} />
           {/* Additional content here */}
         </div>
-        <div className="lg:ml-2 w-56 customCard">
+        <div className="lg:ml-2 w-64 customCard">
           <CustomCard
             title={companyInfo.title}
             contentIcon={companyInfo.contentIcon}
