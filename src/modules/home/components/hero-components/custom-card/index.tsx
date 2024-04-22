@@ -41,7 +41,9 @@ export const BonusCard = () => {
     <div className="bonusCard flex w-[300px] medium:w-full">
       <div className="z-[10000001]">
         <Image src={whiteLogo} alt={""} width={100} height={50} />
-        <h1 className="text-xl p-0 text-white font-bold ml-1">Africa & Asia</h1>
+        <h1 className="text-xl p-0 text-white font-bold ml-1 mt-[2em]">
+          Africa & Asia
+        </h1>
         <h4 className="text-white font-bold ml-1 text-sm">Store</h4>
         <p className="text-[10px] text-white ml-1">
           Embark on a cultural exploration with our curated selection of African
@@ -52,9 +54,9 @@ export const BonusCard = () => {
         <Image
           src={advertWoman}
           alt={""}
-          className="medium:mt-[43%] ml-0 rounded-br-2xl"
-          width={400}
-          height={400}
+          className="mt-[28%] medium:mt-[45%] ml-0 rounded-br-2xl"
+          width={500}
+          height={500}
         />
       </div>
     </div>

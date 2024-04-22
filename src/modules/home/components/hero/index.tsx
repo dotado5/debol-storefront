@@ -43,7 +43,7 @@ const Hero = async ({
 
   return (
     <div className=" w-full border-ui-border-base medium:relative bg-ui-bg-subtle">
-      <div className="flex mt-6 hero ">
+      <div className="flex mt-6 hero w-auto">
         <Sidebar collections={collections} />
         <div className=" xl:w-4/6 mt-2 w-auto bannerSlider">
           <BannerSlider collections={collections} />
