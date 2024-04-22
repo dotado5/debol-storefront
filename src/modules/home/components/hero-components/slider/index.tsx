@@ -54,6 +54,7 @@ const BannerSlider = ({
       textColor: "[#FF4C25]",
       buttonClassName: "border-[#E7E9E7] bg-[#A7D3B5] text-[#415315]",
       buttonContent: <TranslationComponent query={"Unlock New Tastes"} />,
+
       className: "slider3",
       path: "/collections/seasoning_spices",
     },
@@ -96,7 +97,7 @@ const BannerSlider = ({
         // navigation={true}
         modules={[Autoplay, Pagination, Navigation]}
         loop={true}
-        className=" h-[300px] md:h-[400px] lg:h-[454px] lg:w-[500px] medium:w-full"
+        className=" h-[300px] md:h-[400px] lg:h-[454px]"
       >
         {slides.map((slide, index) => (
           <SwiperSlide key={index}>

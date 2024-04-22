@@ -8,6 +8,7 @@ import Image from "next/image"
 import logo from "assets/debolslogo.jpg"
 import { CiLinkedin, CiTwitter, CiInstagram } from "react-icons/ci"
 import { RiFacebookBoxLine } from "react-icons/ri"
+import TranslationComponent from "@modules/Translator/component/translation"
 
 export default async function Footer() {
   const { collections } = await getCollectionsList(0, 6)
@@ -15,40 +16,40 @@ export default async function Footer() {
 
   const columns = [
     {
-      title: "What We Do",
+      title: <TranslationComponent query={"What We Do"}/>,
       links: [
         {
-          name: "Store",
+          name: <TranslationComponent query={"Store"}/>,
           to: "#",
         },
         {
-          name: "African Store",
+          name: <TranslationComponent query={"African Store"}/>,
           to: "#",
         },
       ],
     },
     {
-      title: "Services",
+      title: <TranslationComponent query={"Services"}/>,
       links: [
         {
-          name: "Delivery Service",
+          name: <TranslationComponent query={"Delivery Service"}/>,
           to: "",
         },
       ],
     },
     {
-      title: "Resources",
+      title: <TranslationComponent query={"Resources"}/>,
       links: [
         {
-          name: "Privacy Policy",
+          name: <TranslationComponent query={"Privacy Policy"}/>,
           to: "",
         },
         {
-          name: "Terms and Conditions",
+          name: <TranslationComponent query={"Terms and Conditions"}/>,
           to: "",
         },
         {
-          name: "FAQs",
+          name: <TranslationComponent query={"FAQs"}/>,
           to: "",
         },
       ],
@@ -63,7 +64,7 @@ export default async function Footer() {
   ]
 
   return (
-    <footer className="border-t border-ui-border-base w-full bg-[#A7D3B5] ">
+    <footer className="border-t border-ui-border-base w-full bg-[#F5F5F5] ">
       <div className="content-container flex flex-col w-full">
         <div className="flex flex-col gap-y-6 xsmall:flex-row items-start justify-between py-10">
           <div>
@@ -161,11 +162,11 @@ export default async function Footer() {
         <div className="flex w-full mb-16 justify-between text-ui-fg-muted">
           <div>
             <Text className="txt-compact-small">
-              © {new Date().getFullYear()} Debol Store. All rights reserved.
+              © {new Date().getFullYear()} <TranslationComponent query={"Debol Store. All rights reserved."} />
             </Text>
           </div>
           <div className="flex gap-2 font-bold text-xs ml-4">
-            developed by{" "}
+          <TranslationComponent query={"developed by"} /> {" "} 
             <p className="flex text-green-700">
               <a href="https://doyenify.com/">
                 doyenif<span className="text-gray-500">y</span>

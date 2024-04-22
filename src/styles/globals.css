@@ -365,7 +365,7 @@ body {
   }
 
   .bannerSlider {
-    @apply mx-auto mt-6;
+    @apply w-full mx-auto mt-6;
   }
 
   .subCategories {

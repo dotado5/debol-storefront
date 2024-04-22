@@ -11,7 +11,7 @@ import { notFound } from "next/navigation"
 
 export const metadata: Metadata = {
   title: "Profile",
-  description: "View and edit your Debol Store profile.",
+  description: "View and edit your Medusa Store profile.",
 }
 
 export default async function Profile() {

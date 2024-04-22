@@ -1,9 +1,9 @@
 import { instantMeiliSearch } from "@meilisearch/instant-meilisearch"
 
 const endpoint =
-  process.env.NEXT_PUBLIC_SEARCH_ENDPOINT || "https://ms-ec3a5ece5d6d-8236.nyc.meilisearch.io"
+  process.env.NEXT_PUBLIC_SEARCH_ENDPOINT || "https://ms-d6ea248bf727-9074.lon.meilisearch.io"
 
-const apiKey = process.env.NEXT_PUBLIC_SEARCH_API_KEY || "f19ce04e61bad351e301d22903aa859d46f403560a4e8ee2f5e9b74fddaabef4"
+const apiKey = process.env.NEXT_PUBLIC_SEARCH_API_KEY || "7e23e38d919c5d45b7a92928f7d324e01b9e28ab88da6e3851afe17373de9719"
 
 export const searchClient = instantMeiliSearch(endpoint, apiKey)
 
