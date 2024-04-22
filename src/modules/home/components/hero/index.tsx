@@ -21,27 +21,31 @@ const Hero = async ({
   // console.log(collection)
 
   const companyInfo = {
-    title: <TranslationComponent query={"Contact Us"}/>,
+    title: <TranslationComponent query={"Contact Us"} />,
     content: [],
     contentIcon: [
       {
-        title: <TranslationComponent query={"Call to Order: +372 53851546"}/>,
+        title: <TranslationComponent query={"Call to Order: +372 53851546"} />,
         icon: <MdAddCall className="text-[#1E854C]" />,
       },
       {
-        title: <TranslationComponent query={"Email: debolsfood@gmail.com"}/>,
+        title: <TranslationComponent query={"Email: debolsfood@gmail.com"} />,
         icon: <MdEmail className="text-[#1E854C]" />,
       },
       {
-
-        title: <TranslationComponent query={"WhatsApp: 090234555"}/>, 
+        title: <TranslationComponent query={"WhatsApp: +372 53851546"} />,
         icon: <FaWhatsapp className="text-[#1E854C]" />,
       },
       {
-        title: <TranslationComponent query={"Location: Mustamäe tee 12, Tallinn (inside Maxima building)"}/>,
+        title: (
+          <TranslationComponent
+            query={
+              "Location: Mustamäe tee 12, Tallinn (inside Maxima building)"
+            }
+          />
+        ),
         icon: <FaLocationDot className="text-[#1E854C]" />,
       },
-   
     ],
   }
 
@@ -53,7 +57,7 @@ const Hero = async ({
           <BannerSlider collections={collections} />
           {/* Additional content here */}
         </div>
-        <div className="lg:ml-2 w-56 customCard">
+        <div className="lg:ml-2 w-[280px] customCard">
           <CustomCard
             title={companyInfo.title}
             contentIcon={companyInfo.contentIcon}

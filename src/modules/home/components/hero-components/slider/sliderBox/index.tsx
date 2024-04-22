@@ -2,7 +2,7 @@ import Image from "next/image"
 import { useRouter } from "next/navigation"
 import React from "react"
 
-const SliderBox = ({
+const index = ({
   image,
   title,
   description,
@@ -59,4 +59,4 @@ const SliderBox = ({
   )
 }
 
-export default SliderBox
+export default index
