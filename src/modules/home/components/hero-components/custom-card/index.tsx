@@ -26,10 +26,10 @@ export const CustomCard: React.FC<CardProps> = ({
 }) => {
   return (
     <div className="bg-[#f5f6f4] shadow-lg rounded-2xl p-6 w-full md:w-auto mb-4">
-      <h2 className="text-sm font-semibold mb-4">{title}</h2>
+      {/* <h2 className="text-sm font-semibold mb-4">{title}</h2> */}
       {contentIcon &&
         contentIcon.map((item, index) => (
-          <div key={index} className="flex items-center mb-3 gap-2 text-xs">
+          <div key={index} className="flex items-center mb-3 gap-2 text-sm">
             {item.icon}
             <p>{item.title}</p>
           </div>
@@ -40,10 +40,10 @@ export const CustomCard: React.FC<CardProps> = ({
 
 export const BonusCard = () => {
   return (
-    <div className="bonusCard flex w-[300px] medium:w-full">
+    <div className="bonusCard flex w-[300px] medium:w-full mx-auto md:mx-0">
       <div className="z-[10000001]">
         <Image src={whiteLogo} alt={""} width={100} height={50} />
-        <h1 className="text-xl p-0 text-white font-bold ml-1 medium:mt-[1.5em]">
+        <h1 className="text-xl p-0 text-white font-bold ml-1 mt-[1em] medium:mt-[1.5em]">
           <TranslationComponent query={"Africa & Asia"} />
         </h1>
         <h4 className="text-white font-bold ml-1 text-sm">
@@ -62,7 +62,7 @@ export const BonusCard = () => {
         <Image
           src={advertWoman}
           alt={""}
-          className="medium:mt-[41%] ml-0 rounded-br-2xl"
+          className="medium:mt-[40.2%] ml-0 rounded-br-2xl mt-[2.3em]"
           width={400}
           height={400}
         />

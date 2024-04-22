@@ -155,7 +155,7 @@ body {
 }
 
 /* ipad screen 768px */
-@media (min-width: 650px) and (max-width: 850px) {
+@media (min-width: 640px) and (max-width: 1024px) {
   .cartItem {
     @apply w-[730px];
   }
@@ -166,6 +166,22 @@ body {
 
   .checkoutBox {
     @apply mx-[10%] w-[550px] mb-6;
+  }
+
+  .productImages {
+    @apply grid grid-cols-2;
+  }
+
+  .productDescription button {
+    @apply relative right-0 left-[-8em] top-[3em];
+  }
+
+  .relatedProducts {
+    @apply grid grid-cols-2;
+  }
+
+  .customCard {
+    @apply mt-4 w-[400px] mx-[14%] flex gap-4 flex-col;
   }
 }
 
@@ -323,22 +339,7 @@ body {
 }
 
 /* lg */
-@media (min-width: 650px) and (max-width: 1024px) {
-  .productImages {
-    @apply grid grid-cols-2;
-  }
-
-  .productDescription button {
-    @apply relative right-0 left-[-8em] top-[3em];
-  }
-
-  .relatedProducts {
-    @apply grid grid-cols-2;
-  }
-
-  .customCard {
-    @apply mt-4  w-full mx-[14%] flex gap-4;
-  }
+@media (min-width: 640px) and (max-width: 1024px) {
 }
 
 @media (min-width: 850px) and (max-width: 1280px) {
