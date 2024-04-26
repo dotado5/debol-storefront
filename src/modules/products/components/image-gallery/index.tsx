@@ -34,7 +34,7 @@ const ImageGallery = ({ images }: ImageGalleryProps) => {
               <img
                 src={image.url}
                 alt=""
-                className="mx-auto w-[400px] h-auto"
+                className="mx-auto w-[300px] h-auto"
               />
             </Container>
           )
