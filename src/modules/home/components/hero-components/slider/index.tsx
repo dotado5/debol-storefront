@@ -14,6 +14,7 @@ import cassavaFlakes from "assets/slidesImages/cassaveFlakes.svg"
 import legumes from "assets/slidesImages/legumes.svg"
 import SliderBox from "./sliderBox"
 import TranslationComponent from "@modules/Translator/component/translation"
+import deliveryMan from "assets/delivery_man.svg"
 
 const BannerSlider = ({
   collections,
@@ -83,6 +84,16 @@ const BannerSlider = ({
       buttonContent: <TranslationComponent query={"SHOP NOW"} />,
       className: "slider5",
       path: "/collections/beans_grains",
+    },
+    {
+      image: deliveryMan,
+      title: <TranslationComponent query={"Enjoy free delivery for orders "} />,
+      description: <TranslationComponent query={"over 35 Euros"} />,
+      textColor: "white",
+      buttonClassName: "border-[#E0D8CC] bg-white text-[#415315]",
+      buttonContent: <TranslationComponent query={"SHOP NOW"} />,
+      className: "slider6",
+      path: "/store",
     },
   ]
 
