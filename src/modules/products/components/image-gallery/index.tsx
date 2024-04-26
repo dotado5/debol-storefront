@@ -31,15 +31,10 @@ const ImageGallery = ({ images }: ImageGalleryProps) => {
                 height={400}
               /> */}
 
-              <Image
+              <img
                 src={image.url}
-                alt={`Product image ${index + 1}`}
-                className="mx-auto  "
-                width={400}
-                height={400}
-                style={{
-                  objectFit: "contain",
-                }}
+                alt=""
+                className="mx-auto w-[400px] h-auto"
               />
             </Container>
           )
