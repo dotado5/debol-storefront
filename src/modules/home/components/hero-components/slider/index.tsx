@@ -25,7 +25,7 @@ const BannerSlider = ({
       image: meat,
       title: <TranslationComponent query={"Estonia's Destination"} />,
       description: (
-        <TranslationComponent query={"for Authentic African Store"} />
+        <TranslationComponent query={"for Authentic African Food"} />
       ),
       textColor: "black",
       buttonClassName: "border-white bg-[#FF4C25] text-white",
@@ -37,7 +37,9 @@ const BannerSlider = ({
       image: fruits,
       title: <TranslationComponent query={"African Delights Await"} />,
       description: (
-        <TranslationComponent query={"Order Now for Delivery in Estonia"} />
+        <TranslationComponent
+          query={"Order Now for Delivery in Tallinn & Tartu (Estonia)"}
+        />
       ),
       textColor: "white",
       buttonClassName: "border-white bg-[#F3D044] text-[#415315]",
@@ -49,7 +51,9 @@ const BannerSlider = ({
       image: vegetablesAdSpices,
       title: <TranslationComponent query={"SAVOUR THE SPICE"} />,
       description: (
-        <TranslationComponent query={"Order Now for Delivery in Estonia"} />
+        <TranslationComponent
+          query={"Order Now for Delivery in Tallinn & Tartu (Estonia)"}
+        />
       ),
       textColor: "[#FF4C25]",
       buttonClassName: "border-[#E7E9E7] bg-[#A7D3B5] text-[#415315]",

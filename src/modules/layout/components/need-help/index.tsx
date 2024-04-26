@@ -24,7 +24,9 @@ const Index = () => {
       {helpOpen && (
         <div className="absolute top-[4em] right-[8%] flex flex-col items-center bg-[#A7D3B5] p-2 rounded-lg">
           <a
-            href="#"
+            href="https://wa.me/+37253851546"
+            target="_blank"
+            rel="noopener noreferrer"
             className="flex items-center gap-2 whitespace-nowrap text-base text-black hover:text-gray-900 "
           >
             <FaWhatsapp />

@@ -236,11 +236,11 @@ body {
     @apply w-full mx-auto mt-6;
   }
 
-  .sidebar {
+  /* .sidebar {
     display: grid;
     width: 100%;
     @apply h-auto mx-auto;
-  }
+  } */
 
   .categoryBox {
     @apply mt-3 mx-auto;
@@ -274,11 +274,11 @@ body {
     @apply mt-4 mx-0 w-full flex gap-2 flex-col;
   }
 
-  .sidebar {
+  /* .sidebar {
     display: grid;
     width: 100%;
     @apply h-auto mx-auto;
-  }
+  } */
 
   .categoryBox {
     @apply mt-3 mx-auto;
@@ -342,12 +342,12 @@ body {
     flex-direction: column;
   }
 
-  .sidebar {
+  /* .sidebar {
     display: grid;
     width: 100%;
     margin-left: -0.3em;
     @apply h-auto mx-auto;
-  }
+  } */
 
   .mobile {
     @apply left-[-2.5em];

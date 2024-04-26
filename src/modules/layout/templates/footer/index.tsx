@@ -87,14 +87,14 @@ export default async function Footer() {
           <div className="text-small-regular gap-10 md:gap-x-16 grid grid-cols-2 medium:grid-cols-2">
             {columns.map((column, index) => (
               <div key={index} className="flex flex-col gap-3 ml-[3em] column">
-                <h3 className="txt-small-plus txt-ui-fg-base">
+                <h3 className="text-base font-bold txt-ui-fg-base">
                   {column.title}
                 </h3>
                 {column.links.map((link, index) => (
                   <LocalizedClientLink
                     href={link.to}
                     key={index}
-                    className="hover:text-ui-fg-base text-ui-fg-subtle txt-small"
+                    className="hover:text-ui-fg-base text-ui-fg-subtle text-base"
                   >
                     {link.name}
                   </LocalizedClientLink>
@@ -103,9 +103,7 @@ export default async function Footer() {
             ))}
             {product_categories && product_categories?.length > 0 && (
               <div className="flex flex-col gap-y-2">
-                <span className="txt-small-plus txt-ui-fg-base">
-                  Categories
-                </span>
+                <span className="text-base txt-ui-fg-base">Categories</span>
                 <ul className="grid grid-cols-1 gap-2">
                   {product_categories?.slice(0, 6).map((c) => {
                     if (c.parent_category) {
@@ -121,13 +119,13 @@ export default async function Footer() {
 
                     return (
                       <li
-                        className="flex flex-col gap-2 text-ui-fg-subtle txt-small"
+                        className="flex flex-col gap-2 text-ui-fg-subtle text-base"
                         key={c.id}
                       >
                         <LocalizedClientLink
                           className={clx(
                             "hover:text-ui-fg-base",
-                            children && "txt-small-plus"
+                            children && "text-base"
                           )}
                           href={`/categories/${c.handle}`}
                         >
@@ -158,14 +156,14 @@ export default async function Footer() {
         </div>
         <div className="flex w-full mb-16 justify-between text-ui-fg-muted">
           <div>
-            <Text className="txt-compact-small">
+            <Text className="text-base">
               © {new Date().getFullYear()}{" "}
               <TranslationComponent
                 query={"Debol Store. All rights reserved."}
               />
             </Text>
           </div>
-          <div className="flex gap-2 font-bold text-xs ml-4">
+          <div className="flex gap-2 font-bold text-base ml-4">
             <TranslationComponent query={"developed by"} />{" "}
             <p className="flex text-green-700">
               <a href="https://doyenify.com/">

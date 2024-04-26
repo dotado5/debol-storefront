@@ -11,6 +11,8 @@ import ProductInfo from "@modules/products/templates/product-info"
 import SkeletonRelatedProducts from "@modules/skeletons/templates/skeleton-related-products"
 import { notFound } from "next/navigation"
 import ProductActionsWrapper from "./product-actions-wrapper"
+import LocalizedClientLink from "@modules/common/components/localized-client-link"
+import ChevronDown from "@modules/common/icons/chevron-down"
 
 type ProductTemplateProps = {
   product: PricedProduct
@@ -30,6 +32,18 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
   return (
     <>
       <div className="content-container flex flex-col small:flex-row small:items-start py-6 relative">
+        <LocalizedClientLink
+          href="/"
+          className="text-small-semi text-ui-fg-base flex items-center gap-x-2 uppercase flex-1 basis-0 ml-[-3em]"
+        >
+          <ChevronDown className="rotate-90" size={16} />
+          <span className="mt-px hidden small:block txt-compact-plus text-ui-fg-subtle hover:text-ui-fg-base ">
+            Back
+          </span>
+          <span className="mt-px block small:hidden txt-compact-plus text-ui-fg-subtle hover:text-ui-fg-base">
+            Back
+          </span>
+        </LocalizedClientLink>
         <div className="flex flex-col small:sticky small:top-48 small:py-0 small:max-w-[300px] w-full py-8 gap-y-6">
           <ProductInfo product={product} />
           <ProductTabs product={product} />
