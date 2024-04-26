@@ -1,6 +1,8 @@
 import { EllipseMiniSolid } from "@medusajs/icons"
 import { Label, RadioGroup, Text, clx } from "@medusajs/ui"
+import ChevronDown from "@modules/common/icons/chevron-down"
 import { ChangeEvent } from "react"
+import LocalizedClientLink from "../localized-client-link"
 
 type FilterRadioGroupProps = {
   title: string
@@ -20,6 +22,18 @@ const FilterRadioGroup = ({
 }: FilterRadioGroupProps) => {
   return (
     <div className="flex gap-x-3 flex-col gap-y-3">
+      <LocalizedClientLink
+        href="/"
+        className="text-small-semi text-ui-fg-base flex items-center gap-x-2 uppercase flex-1 basis-0 ml-[-3em]"
+      >
+        <ChevronDown className="rotate-90" size={16} />
+        <span className="mt-px hidden small:block txt-compact-plus text-ui-fg-subtle hover:text-ui-fg-base ">
+          Back
+        </span>
+        <span className="mt-px block small:hidden txt-compact-plus text-ui-fg-subtle hover:text-ui-fg-base">
+          Back
+        </span>
+      </LocalizedClientLink>
       <Text className="txt-compact-small-plus text-ui-fg-muted">{title}</Text>
       <RadioGroup>
         {items?.map((i) => (

@@ -28,9 +28,11 @@ const SliderBox = ({
   }
   // console.log(textColor)
   return (
-    <div className={`${className}`}>
-      <div className="absolute z-[10000001] flex flex-col items-start w-[350px] md:w-[450px] top-[20%] gap-2 ml-[3em] md:ml-[6em]">
-        <h1 className={` text-${textColor} text-2xl medium:text-6xl text-left`}>
+    <div className={`${className} rounded-lg before:rounded-lg`}>
+      <div className="absolute z-[1000000001] flex flex-col items-start w-[350px] md:w-[450px] top-[20%] gap-2 ml-[3em] md:ml-[6em]">
+        <h1
+          className={` text-${textColor} text-2xl medium:text-6xl text-left font-bold`}
+        >
           {title}
         </h1>
         <h2
@@ -51,7 +53,7 @@ const SliderBox = ({
       <Image
         src={image}
         alt={""}
-        className="absolute z-[10000001] right-0 bottom-0 w-[200px] h-[200px] medium:w-[500px] medium:h-[500px]"
+        className="absolute z-[10000001] right-0 bottom-0 w-[250px] h-[250px] medium:w-[500px] medium:h-[500px]"
         // width={500}
         // height={500}
       />

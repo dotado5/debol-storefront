@@ -64,7 +64,7 @@ const CountrySelect = ({ toggleState, regions }: CountrySelectProps) => {
             : undefined
         }
       >
-        <Listbox.Button className="py-1 w-full">
+        {/* <Listbox.Button className="py-1 w-full">
           <div className="txt-compact-small flex items-start gap-x-2">
             <span>Shipping to:</span>
             {current && (
@@ -81,7 +81,7 @@ const CountrySelect = ({ toggleState, regions }: CountrySelectProps) => {
               </span>
             )}
           </div>
-        </Listbox.Button>
+        </Listbox.Button> */}
         <div className="flex relative w-full min-w-[320px]">
           <Transition
             show={state}

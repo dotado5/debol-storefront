@@ -14,7 +14,7 @@ const Index = () => {
     <div>
       <LocalizedClientLink
         href={""}
-        className="hover:text-ui-fg-base flex items-center gap-2 "
+        className="hover:text-ui-fg-base flex text-base items-center gap-2 "
         onClick={() => setHelpOpen(!helpOpen)}
       >
         <IoMdHelpCircleOutline />
@@ -25,7 +25,7 @@ const Index = () => {
         <div className="absolute top-[4em] right-[8%] flex flex-col items-center bg-[#A7D3B5] p-2 rounded-lg">
           <a
             href="#"
-            className="flex items-center gap-2 whitespace-nowrap text-sm text-black hover:text-gray-900 "
+            className="flex items-center gap-2 whitespace-nowrap text-base text-black hover:text-gray-900 "
           >
             <FaWhatsapp />
             Chat with Us

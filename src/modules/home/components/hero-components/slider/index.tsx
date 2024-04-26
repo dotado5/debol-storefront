@@ -97,7 +97,7 @@ const BannerSlider = ({
         // navigation={true}
         modules={[Autoplay, Pagination, Navigation]}
         loop={true}
-        className=" h-[300px] md:h-[400px] lg:h-[454px] lg:w-[400px] medium:w-auto"
+        className=" h-[300px] md:h-[400px] lg:h-[454px] lg:w-full medium:w-auto sliderCont"
       >
         {slides.map((slide, index) => (
           <SwiperSlide key={index}>

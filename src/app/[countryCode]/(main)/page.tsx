@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   description: "Debol's african food, your one stop african foods store",
 }
 
-const getCollectionsWithProducts = cache(
+export const getCollectionsWithProducts = cache(
   async (
     countryCode: string
   ): Promise<ProductCollectionWithPreviews[] | null> => {

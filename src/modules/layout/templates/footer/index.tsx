@@ -15,41 +15,41 @@ export default async function Footer() {
   const { product_categories } = await getCategoriesList(0, 6)
 
   const columns = [
+    // {
+    //   title: <TranslationComponent query={"What We Do"} />,
+    //   links: [
+    //     {
+    //       name: <TranslationComponent query={"Store"} />,
+    //       to: "#",
+    //     },
+    //     {
+    //       name: <TranslationComponent query={"African Store"} />,
+    //       to: "#",
+    //     },
+    //   ],
+    // },
     {
-      title: <TranslationComponent query={"What We Do"}/>,
+      title: <TranslationComponent query={"Services"} />,
       links: [
         {
-          name: <TranslationComponent query={"Store"}/>,
-          to: "#",
-        },
-        {
-          name: <TranslationComponent query={"African Store"}/>,
-          to: "#",
-        },
-      ],
-    },
-    {
-      title: <TranslationComponent query={"Services"}/>,
-      links: [
-        {
-          name: <TranslationComponent query={"Delivery Service"}/>,
+          name: <TranslationComponent query={"Delivery Service"} />,
           to: "",
         },
       ],
     },
     {
-      title: <TranslationComponent query={"Resources"}/>,
+      title: <TranslationComponent query={"Resources"} />,
       links: [
         {
-          name: <TranslationComponent query={"Privacy Policy"}/>,
+          name: <TranslationComponent query={"Privacy Policy"} />,
           to: "",
         },
         {
-          name: <TranslationComponent query={"Terms and Conditions"}/>,
+          name: <TranslationComponent query={"Terms and Conditions"} />,
           to: "",
         },
         {
-          name: <TranslationComponent query={"FAQs"}/>,
+          name: <TranslationComponent query={"FAQs"} />,
           to: "",
         },
       ],
@@ -57,10 +57,11 @@ export default async function Footer() {
   ]
 
   const socials = [
-    { tag: <CiLinkedin />, src: "" },
-    { tag: <RiFacebookBoxLine />, src: "" },
-    { tag: <CiTwitter />, src: "" },
-    { tag: <CiInstagram />, src: "" },
+    {
+      tag: <RiFacebookBoxLine />,
+      src: "https://www.facebook.com/profile.php?id=100048446393932",
+    },
+    { tag: <CiInstagram />, src: "https://www.instagram.com/debolsstore/" },
   ]
 
   return (
@@ -77,13 +78,9 @@ export default async function Footer() {
 
             <div className="flex gap-2 socials mt-[1em]">
               {socials.map((social, index) => (
-                <LocalizedClientLink
-                  href={social.src}
-                  className="text-[30px]"
-                  key={index}
-                >
+                <a href={social.src} className="text-[30px]" key={index}>
                   {social.tag}
-                </LocalizedClientLink>
+                </a>
               ))}
             </div>
           </div>
@@ -162,11 +159,14 @@ export default async function Footer() {
         <div className="flex w-full mb-16 justify-between text-ui-fg-muted">
           <div>
             <Text className="txt-compact-small">
-              © {new Date().getFullYear()} <TranslationComponent query={"Debol Store. All rights reserved."} />
+              © {new Date().getFullYear()}{" "}
+              <TranslationComponent
+                query={"Debol Store. All rights reserved."}
+              />
             </Text>
           </div>
           <div className="flex gap-2 font-bold text-xs ml-4">
-          <TranslationComponent query={"developed by"} /> {" "} 
+            <TranslationComponent query={"developed by"} />{" "}
             <p className="flex text-green-700">
               <a href="https://doyenify.com/">
                 doyenif<span className="text-gray-500">y</span>
@@ -179,52 +179,3 @@ export default async function Footer() {
     </footer>
   )
 }
-
-// {
-//   collections && collections.length > 0 && (
-//     <div className="flex flex-col gap-y-2">
-//       <span className="txt-small-plus txt-ui-fg-base">Collections</span>
-//       <ul
-//         className={clx("grid grid-cols-1 gap-2 text-ui-fg-subtle txt-small", {
-//           "grid-cols-2": (collections?.length || 0) > 3,
-//         })}
-//       >
-//         {collections?.slice(0, 6).map((c) => (
-//           <li key={c.id}>
-//             <LocalizedClientLink
-//               className="hover:text-ui-fg-base"
-//               href={`/collections/${c.handle}`}
-//             >
-//               {c.title}
-//             </LocalizedClientLink>
-//           </li>
-//         ))}
-//       </ul>
-//     </div>
-//   )
-// }  {collections && collections.length > 0 && (
-//             <div className="flex flex-col gap-y-2">
-//               <span className="txt-small-plus txt-ui-fg-base">
-//                 Collections
-//               </span>
-//               <ul
-//                 className={clx(
-//                   "grid grid-cols-1 gap-2 text-ui-fg-subtle txt-small",
-//                   {
-//                     "grid-cols-2": (collections?.length || 0) > 3,
-//                   }
-//                 )}
-//               >
-//                 {collections?.slice(0, 6).map((c) => (
-//                   <li key={c.id}>
-//                     <LocalizedClientLink
-//                       className="hover:text-ui-fg-base"
-//                       href={`/collections/${c.handle}`}
-//                     >
-//                       {c.title}
-//                     </LocalizedClientLink>
-//                   </li>
-//                 ))}
-//               </ul>
-//             </div>
-//           )}

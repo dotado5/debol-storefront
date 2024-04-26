@@ -81,7 +81,7 @@ const CartDropdown = ({
       <Popover className="relative h-full">
         <Popover.Button className="h-full">
           <LocalizedClientLink
-            className="hover:text-ui-fg-base flex items-center gap-1"
+            className="hover:text-ui-fg-base text-base ml-[-1em] md:ml-0 flex items-center gap-1"
             href="/cart"
           >
             <IoCartOutline /> <TranslationComponent query={`Cart`} /> (

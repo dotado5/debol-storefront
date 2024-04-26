@@ -9,29 +9,34 @@ import TranslationComponent from "@modules/Translator/component/translation"
 
 interface ContentIcons {
   title: any
+  text: any
   icon?: any
 }
 
 interface CardProps {
   title: any
-  content?: any[]
   imageUrl?: any // Optional image URL for the bonus card
-  contentIcon?: ContentIcons[]
+  content?: ContentIcons[]
 }
 
 export const CustomCard: React.FC<CardProps> = ({
   title,
   imageUrl,
-  contentIcon,
+  content,
 }) => {
   return (
-    <div className="bg-[#f5f6f4] shadow-lg rounded-2xl p-6 w-full md:w-auto mb-4">
+    <div className="bg-[#f5f6f4] shadow-lg flex flex-col justify-between rounded-lg p-2 w-full md:w-full  mb-4 h-[50%]">
       {/* <h2 className="text-sm font-semibold mb-4">{title}</h2> */}
-      {contentIcon &&
-        contentIcon.map((item, index) => (
-          <div key={index} className="flex items-center mb-3 gap-2 text-sm">
+      {content &&
+        content.map((item, index) => (
+          <div
+            key={index}
+            className="flex items-center mb-3 gap-4 text-base lg:text-base "
+          >
             {item.icon}
-            <p>{item.title}</p>
+            <p className="flex flex-col font-bold">
+              {item.title} <span className="font-normal">{item.text}</span>
+            </p>
           </div>
         ))}
     </div>
@@ -40,17 +45,16 @@ export const CustomCard: React.FC<CardProps> = ({
 
 export const BonusCard = () => {
   return (
-    <div className="bonusCard flex w-[300px] medium:w-full mx-auto md:mx-0">
+    <div className="bonusCard flex w-full medium:w-full md:mx-0 h-full ">
       <div className="z-[10000001]">
         <Image src={whiteLogo} alt={""} width={100} height={50} />
-        <h1 className="text-xl p-0 text-white font-bold ml-1 mt-[1em] medium:mt-[1.5em]">
+        <h1 className="text-4xl p-0 text-white font-bold ml-1 mt-[1em] md:mt-[-0.05px] medium:mt-0">
           <TranslationComponent query={"Africa & Asia"} />
         </h1>
-        <h4 className="text-white font-bold ml-1 text-sm">
-          {" "}
+        <h4 className="text-white font-bold ml-1 text-xl">
           <TranslationComponent query={"Store"} />
         </h4>
-        <p className="text-[10px] text-white ml-1">
+        <p className="text-base lg:text-xs text-white ml-1 w-full">
           <TranslationComponent
             query={
               "Explore African and Asian wonders with our curated collection."
@@ -62,9 +66,9 @@ export const BonusCard = () => {
         <Image
           src={advertWoman}
           alt={""}
-          className="medium:mt-[40.2%] ml-0 rounded-br-2xl mt-[2.3em]"
-          width={400}
-          height={400}
+          className=" ml-0 rounded-br-2xl mt-0 medium:mt-[-3.2em] w-[300px] h-[200px] medium:w-[400px] medium:h-[300px]"
+          // width={400}
+          // height={400}
         />
       </div>
     </div>

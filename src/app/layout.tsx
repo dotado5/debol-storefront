@@ -12,9 +12,10 @@ const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://localhost:8000"
 export default function RootLayout(props: { children: React.ReactNode }) {
   return (
     <html lang="en" data-mode="light">
-      <body>
+      <body className="">
         <main className="relative">{props.children}</main>
       </body>
     </html>
   )
 }
+// bg-[#b58978]

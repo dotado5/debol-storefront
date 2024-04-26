@@ -4,13 +4,16 @@ import { Popover, Transition } from "@headlessui/react"
 import { ArrowRightMini, XMark } from "@medusajs/icons"
 import { Region } from "@medusajs/medusa"
 import { Text, clx, useToggleState } from "@medusajs/ui"
-import { Fragment } from "react"
-
+import { Fragment, useState } from "react"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import CountrySelect from "../country-select"
+import { MdOutlineArrowDropDownCircle } from "react-icons/md"
+import { ProductCollectionWithPreviews } from "types/global"
+import { Icons } from "@modules/home/components/hero-components/icons"
+import Image from "next/image"
+import TranslationComponent from "@modules/Translator/component/translation"
 
 const SideMenuItems = {
-  Home: "/",
   Store: "/store",
   Search: "/search",
   Account: "/account",
@@ -18,8 +21,15 @@ const SideMenuItems = {
   WhatsApp: "#",
 }
 
-const SideMenu = ({ regions }: { regions: Region[] | null }) => {
+const SideMenu = ({
+  regions,
+  collections,
+}: {
+  regions: Region[] | null
+  collections: ProductCollectionWithPreviews[]
+}) => {
   const toggleState = useToggleState()
+  const [showCategories, setShowCategories] = useState(false)
 
   return (
     <div className="h-full">
@@ -28,7 +38,7 @@ const SideMenu = ({ regions }: { regions: Region[] | null }) => {
           {({ open, close }) => (
             <>
               <div className="relative flex h-full">
-                <Popover.Button className="relative h-full flex items-center transition-all ease-out duration-200 focus:outline-none hover:text-ui-fg-base">
+                <Popover.Button className="relative h-full flex text-base items-center transition-all ease-out duration-200 focus:outline-none hover:text-ui-fg-base">
                   Menu
                 </Popover.Button>
               </div>
@@ -43,7 +53,7 @@ const SideMenu = ({ regions }: { regions: Region[] | null }) => {
                 leaveFrom="opacity-100 backdrop-blur-2xl"
                 leaveTo="opacity-0"
               >
-                <Popover.Panel className="flex flex-col absolute w-full pr-4 sm:pr-0 sm:w-1/3 2xl:w-1/4 sm:min-w-min h-[calc(100vh-1rem)] z-30 inset-x-0 text-sm text-ui-fg-on-color m-2 backdrop-blur-2xl">
+                <Popover.Panel className="flex flex-col absolute w-full pr-4 sm:pr-0 sm:w-1/3 2xl:w-1/4 sm:min-w-min h-[calc(100vh+5rem)] z-30 inset-x-0 text-sm text-ui-fg-on-color m-2 backdrop-blur-2xl ">
                   <div className="flex flex-col h-full bg-[rgba(3,7,18,0.5)] rounded-rounded justify-between p-6">
                     <div className="flex justify-end" id="xmark">
                       <button onClick={close}>
@@ -51,6 +61,51 @@ const SideMenu = ({ regions }: { regions: Region[] | null }) => {
                       </button>
                     </div>
                     <ul className="flex flex-col gap-6 items-start justify-start">
+                      <li>
+                        <LocalizedClientLink
+                          href={"/"}
+                          className="text-3xl leading-10 hover:text-ui-fg-disabled"
+                          onClick={close}
+                        >
+                          Home
+                        </LocalizedClientLink>
+                      </li>
+                      <li>
+                        <div
+                          className="text-3xl leading-10 flex items-center justify-between w-[400px] transition-all"
+                          onClick={() => setShowCategories(!showCategories)}
+                        >
+                          All Categories
+                          <MdOutlineArrowDropDownCircle
+                            className={`transition-all ${
+                              showCategories ? "" : "rotate"
+                            }`}
+                          />
+                        </div>
+                        <ul
+                          className={
+                            showCategories
+                              ? "flex flex-col w-full gap-2 overflow-y-scroll h-[40vh]"
+                              : "hidden"
+                          }
+                        >
+                          {collections.map((collection, index) => (
+                            <LocalizedClientLink
+                              href={`/collections/${collection.handle}`}
+                              className="flex items-center text-xl gap-4 bg-white text-black p-2 rounded-sm "
+                              key={index}
+                            >
+                              <Image
+                                src={Icons[index]}
+                                alt={""}
+                                width={20}
+                                height={20}
+                              />
+                              <TranslationComponent query={collection.title} />
+                            </LocalizedClientLink>
+                          ))}
+                        </ul>
+                      </li>
                       {Object.entries(SideMenuItems).map(([name, href]) => {
                         return (
                           <li key={name}>
@@ -85,7 +140,7 @@ const SideMenu = ({ regions }: { regions: Region[] | null }) => {
                         />
                       </div>
                       <Text className="flex justify-between txt-compact-small">
-                        © {new Date().getFullYear()} Medusa Store. All rights
+                        © {new Date().getFullYear()} Debol Store. All rights
                         reserved.
                       </Text>
                     </div>

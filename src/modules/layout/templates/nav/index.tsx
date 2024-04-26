@@ -18,8 +18,13 @@ import SideMenu from "@modules/layout/components/side-menu"
 import Needhelp from "modules/layout/components/need-help"
 import Translator from "@modules/Translator/translator"
 import TranslationComponent from "@modules/Translator/component/translation"
+import { ProductCollectionWithPreviews } from "types/global"
 
-export default async function Nav() {
+export default async function Nav({
+  collections,
+}: {
+  collections: ProductCollectionWithPreviews[]
+}) {
   const regions = await listRegions().then((regions) => regions)
 
   return (
@@ -27,20 +32,20 @@ export default async function Nav() {
       <header className="relative h-16 mx-auto  duration-200 bg-[#A7D3B5] border-ui-border-base ">
         <nav className="content-container txt-xsmall-plus text-ui-fg-subtle flex items-center justify-between w-full h-full text-small-regular">
           <div className="flex-1 basis-0 h-full flex items-center">
-            <div className="h-full small:hidden">
-              <SideMenu regions={regions} />
+            <div className="h-full medium::hidden lg:mr-3 sideMenu">
+              <SideMenu regions={regions} collections={collections} />
             </div>
 
-            <div className="flex gap-4 ml-[2em] small:ml-0 w-[300px] small:w-auto">
+            <div className="flex gap-4 ml-[1em] small:ml-0 w-[300px] small:w-auto">
               <LocalizedClientLink
                 href="/"
                 className="txt-compact-xlarge-plus hover:text-ui-fg-base uppercase"
               >
-                <Image src={logo} alt={""} width={120} height={120} />
+                <Image src={logo} alt={""} width={100} height={100} />
               </LocalizedClientLink>
               <LocalizedClientLink
                 href="/store"
-                className="text-sm leading-10 hover:text-ui-fg-base"
+                className=" leading-10 text-base hover:text-ui-fg-base"
               >
                 <TranslationComponent query={"All Products"} />
               </LocalizedClientLink>
@@ -56,13 +61,13 @@ export default async function Nav() {
           </div> */}
 
           <div className="flex items-center gap-x-6 h-full flex-1 basis-0 justify-end">
-            <div className="ml-[-4em] medium:ml-0">
+            <div className="ml-[-7em] medium:ml-0">
               <Translator />
             </div>
             <div className="hidden small:flex items-center gap-x-6 h-full">
               {process.env.FEATURE_SEARCH_ENABLED && (
                 <LocalizedClientLink
-                  className="hover:text-ui-fg-base flex items-center gap-2"
+                  className="hover:text-ui-fg-base flex text-base items-center gap-2"
                   href="/search"
                   scroll={false}
                 >
@@ -71,7 +76,7 @@ export default async function Nav() {
                 </LocalizedClientLink>
               )}
               <LocalizedClientLink
-                className="hover:text-ui-fg-base flex items-center gap-2 "
+                className="hover:text-ui-fg-base flex items-center text-base gap-2 "
                 href="/account"
               >
                 <FiUser />
@@ -84,7 +89,7 @@ export default async function Nav() {
             <Suspense
               fallback={
                 <LocalizedClientLink
-                  className="hover:text-ui-fg-base flex gap-2"
+                  className="hover:text-ui-fg-base text-base flex gap-2"
                   href="/cart"
                 >
                   <TranslationComponent query={"Cart"} />

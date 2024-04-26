@@ -1,17 +1,17 @@
 // "use client"
-import { Github } from "@medusajs/icons"
-import { Button, Heading } from "@medusajs/ui"
 
 import { FaWhatsapp } from "react-icons/fa"
-import { MdAddCall, MdEmail } from "react-icons/md"
-import logo from "assets/debolslogo.jpg"
+import { MdAddCall } from "react-icons/md"
 import BannerSlider from "../hero-components/slider"
 import Sidebar from "../hero-components/sidebar"
 import { CustomCard, BonusCard } from "../hero-components/custom-card"
 import { ProductCollectionWithPreviews } from "types/global"
 import { FaLocationDot } from "react-icons/fa6"
-import Translator from "@modules/Translator/translator"
 import TranslationComponent from "@modules/Translator/component/translation"
+import call from "assets/call.svg"
+import whatsApp from "assets/whatsapp.svg"
+import location from "assets/location.svg"
+import Image from "next/image"
 
 const Hero = async ({
   collections,
@@ -22,29 +22,29 @@ const Hero = async ({
 
   const companyInfo = {
     title: <TranslationComponent query={"Contact Us"} />,
-    content: [],
-    contentIcon: [
+    content: [
       {
-        title: <TranslationComponent query={"Call to Order: +372 53851546"} />,
-        icon: <MdAddCall className="text-[#1E854C]" />,
+        title: <TranslationComponent query={"Call to Order: "} />,
+        text: <TranslationComponent query={" +372 53851546"} />,
+        icon: <Image src={call} alt={""} />,
+      },
+      // {
+      //   title: <TranslationComponent query={"Email: debolsfood@gmail.com"} />,
+      //   icon: <MdEmail className="text-[#1E854C]" />,
+      // },
+      {
+        title: <TranslationComponent query={"WhatsApp: "} />,
+        text: <TranslationComponent query={" +372 53851546"} />,
+        icon: <Image src={whatsApp} alt={""} />,
       },
       {
-        title: <TranslationComponent query={"Email: debolsfood@gmail.com"} />,
-        icon: <MdEmail className="text-[#1E854C]" />,
-      },
-      {
-        title: <TranslationComponent query={"WhatsApp: +372 53851546"} />,
-        icon: <FaWhatsapp className="text-[#1E854C]" />,
-      },
-      {
-        title: (
+        title: <TranslationComponent query={"Location: "} />,
+        text: (
           <TranslationComponent
-            query={
-              "Location: Mustamäe tee 12, Tallinn (inside Maxima building)"
-            }
+            query={" Mustamäe tee 12, Tallinn (inside Maxima building)"}
           />
         ),
-        icon: <FaLocationDot className="text-[#1E854C]" />,
+        icon: <Image src={location} alt={""} />,
       },
     ],
   }
@@ -57,11 +57,8 @@ const Hero = async ({
           <BannerSlider collections={collections} />
           {/* Additional content here */}
         </div>
-        <div className="lg:ml-2 w-[280px] customCard">
-          <CustomCard
-            title={companyInfo.title}
-            contentIcon={companyInfo.contentIcon}
-          />
+        <div className="lg:ml-2 w-full mt-4 medium:w-[320px] md:flex medium:flex-col customCard">
+          <CustomCard title={companyInfo.title} content={companyInfo.content} />
           {/* <CustomCard {...bonusInfo} /> */}
           <BonusCard />
         </div>
