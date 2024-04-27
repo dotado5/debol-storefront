@@ -35,7 +35,7 @@ const ImageGallery = ({ images }: ImageGalleryProps) => {
               <img
                 src={image.url}
                 alt=""
-                className="mx-auto w-[300px] h-auto max-h-[300px]"
+                className="mx-auto w-[300px] h-auto max-h-[300px] object-contain"
               />
               {/* <ImageMagnifier src={image.url} alt={"image"} zoom={2} /> */}
             </Container>
