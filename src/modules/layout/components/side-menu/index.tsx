@@ -53,7 +53,7 @@ const SideMenu = ({
                 leaveFrom="opacity-100 backdrop-blur-2xl"
                 leaveTo="opacity-0"
               >
-                <Popover.Panel className="flex flex-col absolute w-full pr-4 sm:pr-0 sm:w-1/3 2xl:w-1/4 sm:min-w-min h-[calc(100vh+5rem)] z-30 inset-x-0 text-sm text-ui-fg-on-color m-2 backdrop-blur-2xl ">
+                <Popover.Panel className="flex flex-col absolute w-full pr-4 sm:pr-0 sm:w-1/3 2xl:w-1/4 sm:min-w-min h-[calc(100vh+5rem)]  inset-x-0 text-sm text-ui-fg-on-color m-2 backdrop-blur-2xl z-[1000001]">
                   <div className="flex flex-col h-full bg-[rgba(3,7,18,0.5)] rounded-rounded justify-between p-6">
                     <div className="flex justify-end" id="xmark">
                       <button onClick={close}>
@@ -94,6 +94,7 @@ const SideMenu = ({
                               href={`/collections/${collection.handle}`}
                               className="flex items-center text-xl gap-4 bg-white text-black p-2 rounded-sm "
                               key={index}
+                              onClick={close}
                             >
                               <Image
                                 src={Icons[index]}

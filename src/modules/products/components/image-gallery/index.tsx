@@ -1,5 +1,6 @@
 import { Image as MedusaImage } from "@medusajs/medusa"
 import { Container } from "@medusajs/ui"
+import ImageMagnifier from "@modules/ImageMagnifier/ImageMagnifier"
 import Image from "next/image"
 
 type ImageGalleryProps = {
@@ -31,11 +32,12 @@ const ImageGallery = ({ images }: ImageGalleryProps) => {
                 height={400}
               /> */}
 
-              <img
+              {/* <img
                 src={image.url}
                 alt=""
                 className="mx-auto w-[300px] h-auto"
-              />
+              /> */}
+              <ImageMagnifier imgUrl={image.url} />
             </Container>
           )
         })}

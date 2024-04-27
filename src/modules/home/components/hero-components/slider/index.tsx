@@ -87,7 +87,7 @@ const BannerSlider = ({
     },
     {
       image: deliveryMan,
-      title: <TranslationComponent query={"Enjoy free delivery for orders "} />,
+      title: <TranslationComponent query={"Enjoy free delivery for orders"} />,
       description: <TranslationComponent query={"over 35 Euros"} />,
       textColor: "white",
       buttonClassName: "border-[#E0D8CC] bg-white text-[#415315]",
@@ -103,7 +103,7 @@ const BannerSlider = ({
         slidesPerView={1}
         spaceBetween={30}
         autoplay={{
-          delay: 2500,
+          delay: 4000,
           disableOnInteraction: false,
         }}
         pagination={{

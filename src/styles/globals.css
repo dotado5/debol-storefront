@@ -565,3 +565,31 @@ body {
 .rotate {
   transform: rotate(180deg); /* Rotate the caret icon 180 degrees */
 }
+
+/* .image-container {
+  position: relative;
+  display: inline-block;
+}
+
+.image-container img {
+  transition: transform 0.3s ease;
+}
+
+.image-container:hover img {
+  transform: scale(1.2);
+} */
+
+.img-magnifier-container {
+  position: relative;
+}
+
+.magnifier-img {
+  width: auto;
+  height: 80vh;
+}
+
+.magnifier-image {
+  width: 200px;
+  height: 200px;
+  border: 2px solid #fff;
+}
