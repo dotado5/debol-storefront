@@ -585,11 +585,37 @@ body {
 
 .magnifier-img {
   width: auto;
-  height: 80vh;
+  height: auto;
 }
 
 .magnifier-image {
-  width: 200px;
-  height: 200px;
+  width: 100px;
+  height: 100px;
   border: 2px solid #fff;
+}
+
+.magnifier-container {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  @apply mx-auto;
+}
+
+.magnifier-image-container {
+  overflow: hidden;
+}
+
+.magnifier-image-container img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.magnifier {
+  position: absolute;
+  width: 200px; /* Adjust the size of the magnifier as needed */
+  height: 200px; /* Adjust the size of the magnifier as needed */
+  border: 1px solid #ccc;
+  pointer-events: none; /* This will allow mouse events to pass through the magnifier */
+  z-index: 100001;
 }
