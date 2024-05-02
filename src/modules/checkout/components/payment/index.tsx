@@ -169,19 +169,18 @@ const Payment = ({
                   Enter your card details:
                 </Text>
 
-                <Elements stripe={stripePromise}>
-                  <CardElement
-                    options={useOptions as StripeCardElementOptions}
-                    onChange={(e) => {
-                      setCardBrand(
-                        e.brand &&
-                          e.brand.charAt(0).toUpperCase() + e.brand.slice(1)
-                      )
-                      setError(e.error?.message || null)
-                      setCardComplete(e.complete)
-                    }}
-                  />
-                </Elements>
+                <CardElement
+                  options={useOptions as StripeCardElementOptions}
+                  onChange={(e) => {
+                    setCardBrand(
+                      e.brand &&
+                        e.brand.charAt(0).toUpperCase() + e.brand.slice(1)
+                    )
+                    setError(e.error?.message || null)
+                    setCardComplete(e.complete)
+                  }}
+                />
+                {/* <Elements stripe={stripePromise}></Elements> */}
               </div>
             )}
 

@@ -64,9 +64,11 @@ const StripePaymentButton = ({
   const disabled = !stripe || !elements ? true : false
 
   const handlePayment = async () => {
+    console.log("handlePayment")
     setSubmitting(true)
 
     if (!stripe || !elements || !card || !cart) {
+      console.log("not", stripe, elements, card, cart)
       setSubmitting(false)
       return
     }
@@ -96,6 +98,7 @@ const StripePaymentButton = ({
       .then(({ error, paymentIntent }) => {
         if (error) {
           const pi = error.payment_intent
+          console.log(error.message)
 
           if (
             (pi && pi.status === "requires_capture") ||
