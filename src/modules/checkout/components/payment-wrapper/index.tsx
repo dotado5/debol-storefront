@@ -14,8 +14,14 @@ type WrapperProps = {
 
 export const StripeContext = createContext(false)
 
-const stripeKey = process.env.PUBLIC_STRIPE_KEY
-const stripePromise = stripeKey ? loadStripe(stripeKey) : null
+const stripeKey =
+  "pk_test_51NnTaCFSZsoFDEdQ9z7qbcfa054A3WKzPJwiaR4NSSPxTsBVSl1kwfxs5DKZ0mUHZ9kZqrYWUBORoxJaQY5WwmP6003nQa6yGa"
+
+export const stripePromise = stripeKey
+  ? loadStripe(stripeKey)
+  : loadStripe(
+      "pk_test_51NnTaCFSZsoFDEdQ9z7qbcfa054A3WKzPJwiaR4NSSPxTsBVSl1kwfxs5DKZ0mUHZ9kZqrYWUBORoxJaQY5WwmP6003nQa6yGa"
+    )
 
 const paypalClientId = process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID
 
