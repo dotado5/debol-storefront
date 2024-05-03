@@ -24,15 +24,6 @@ const Hero = async ({
     title: <TranslationComponent query={"Contact Us"} />,
     content: [
       {
-        title: <TranslationComponent query={"Call to Order: "} />,
-        text: <TranslationComponent query={" +372 53851546"} />,
-        icon: <Image src={call} alt={""} />,
-      },
-      // {
-      //   title: <TranslationComponent query={"Email: debolsfood@gmail.com"} />,
-      //   icon: <MdEmail className="text-[#1E854C]" />,
-      // },
-      {
         title: <TranslationComponent query={"WhatsApp: "} />,
         text: <TranslationComponent query={" +372 53851546"} />,
         icon: <Image src={whatsApp} alt={""} />,
@@ -53,12 +44,12 @@ const Hero = async ({
     <div className=" w-full border-ui-border-base medium:relative bg-ui-bg-subtle">
       <div className="flex mt-2 medium:mt-6 hero ">
         <Sidebar collections={collections} />
-        <div className=" xl:w-4/6 mt-2 w-auto bannerSlider">
+        <div className=" xl:w-4/6 mt-4 w-auto bannerSlider">
           <BannerSlider collections={collections} />
           {/* Additional content here */}
         </div>
         <div className="lg:ml-2 w-full mt-4 medium:w-[320px] md:flex medium:flex-col customCard">
-          <CustomCard title={companyInfo.title} content={companyInfo.content} />
+          <CustomCard content={companyInfo.content} />
           {/* <CustomCard {...bonusInfo} /> */}
           <BonusCard />
         </div>

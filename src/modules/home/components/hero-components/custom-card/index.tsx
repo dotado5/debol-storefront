@@ -14,38 +14,50 @@ interface ContentIcons {
 }
 
 interface CardProps {
-  title: any
-  imageUrl?: any // Optional image URL for the bonus card
   content?: ContentIcons[]
 }
 
-export const CustomCard: React.FC<CardProps> = ({
-  title,
-  imageUrl,
-  content,
-}) => {
+export const CustomCard: React.FC<CardProps> = ({ content }) => {
   return (
-    <div className="bg-[#f5f6f4] shadow-lg flex flex-col justify-between rounded-lg p-2 w-full md:w-full  mb-4 h-[50%]">
-      {/* <h2 className="text-sm font-semibold mb-4">{title}</h2> */}
-      {content &&
-        content.map((item, index) => (
-          <div
-            key={index}
-            className="flex items-center mb-3 gap-4 text-base lg:text-base "
-          >
-            {item.icon}
-            <p className="flex flex-col font-bold">
-              {item.title} <span className="font-normal">{item.text}</span>
-            </p>
-          </div>
-        ))}
-    </div>
+    <>
+      <div className="bg-[#f5f6f4] shadow-lg hidden lg:flex flex-col justify-between rounded-lg p-2 w-full md:w-full  mb-4 h-[50%]">
+        {/* <h2 className="text-sm font-semibold mb-4">{title}</h2> */}
+        {content &&
+          content.map((item, index) => (
+            <div
+              key={index}
+              className="flex items-center mb-3 gap-4 text-base lg:text-base "
+            >
+              {item.icon}
+              <p className="flex flex-col font-bold">
+                {item.title} <span className="font-normal">{item.text}</span>
+              </p>
+            </div>
+          ))}
+      </div>
+
+      {/* for mobile screen */}
+      <div className="flex lg:hidden justify-between rounded-lg w-[330px] items-center relative left-[13%] md:left-[35%] top-[-345px] md:top-[-445px] lg:top-[-495px]">
+        {content &&
+          content.slice(0, 1).map((item, index) => (
+            <div
+              key={index}
+              className="flex items-center mb-3 gap-4 text-base lg:text-base mx-auto "
+            >
+              {item.icon}
+              <p className="flex font-bold">
+                {item.title} <span className="font-normal">{item.text}</span>
+              </p>
+            </div>
+          ))}
+      </div>
+    </>
   )
 }
 
 export const BonusCard = () => {
   return (
-    <div className="bonusCard flex w-full medium:w-full md:mx-0 h-full ">
+    <div className="bonusCard hidden lg:flex w-full medium:w-full md:mx-0 h-full ">
       <div className="z-[10000001]">
         <Image src={whiteLogo} alt={""} width={100} height={50} />
         <h1 className="text-4xl p-0 text-white font-bold ml-1 mt-[1em] md:mt-[-0.05px] medium:mt-0">
