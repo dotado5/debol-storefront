@@ -30,7 +30,7 @@ export default function ProductRail({
       </div>
       <ul className="grid grid-cols-2 small:grid-cols-4 gap-x-6 gap-y-7 small:gap-y-10">
         {products &&
-          products.map((product) => (
+          products.slice(0, 4).map((product) => (
             <li key={product.id}>
               <ProductPreview
                 productPreview={product}

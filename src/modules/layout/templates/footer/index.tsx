@@ -84,7 +84,7 @@ export default async function Footer() {
               ))}
             </div>
           </div>
-          <div className="text-small-regular gap-10 md:gap-x-16 grid grid-cols-2 medium:grid-cols-2">
+          <div className="text-small-regular gap-10 md:gap-x-16 grid grid-cols-2 medium:grid-cols-3">
             {columns.map((column, index) => (
               <div key={index} className="flex flex-col gap-3 ml-[3em] column">
                 <h3 className="text-base font-bold txt-ui-fg-base">
@@ -152,6 +152,11 @@ export default async function Footer() {
                 </ul>
               </div>
             )}
+
+            <div className="flex flex-col text-base w-[250px] items-start ml-[1em] lg:ml-0">
+              <h2 className="font-bold">Location: </h2>
+              <p>Mustamäe tee 12, Tallinn (inside Maxima building)</p>
+            </div>
           </div>
         </div>
         <div className="flex w-full mb-16 justify-between text-ui-fg-muted">
