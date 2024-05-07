@@ -103,7 +103,7 @@ const BannerSlider = ({
         slidesPerView={1}
         spaceBetween={30}
         autoplay={{
-          delay: 4000,
+          delay: 8000,
           disableOnInteraction: false,
         }}
         pagination={{

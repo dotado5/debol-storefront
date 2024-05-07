@@ -37,6 +37,15 @@ const Hero = async ({
         ),
         icon: <Image src={location} alt={""} />,
       },
+      {
+        title: <TranslationComponent query={"Location: "} />,
+        text: (
+          <TranslationComponent
+            query={" Mustamäe tee 12, Tallinn (inside Maxima building)"}
+          />
+        ),
+        icon: <Image src={location} alt={""} />,
+      },
     ],
   }
 

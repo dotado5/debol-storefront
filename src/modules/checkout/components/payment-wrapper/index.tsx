@@ -14,9 +14,11 @@ type WrapperProps = {
 
 export const StripeContext = createContext(false)
 
-const stripeKey = process.env.PUBLIC_STRIPE_KEY
-  ? process.env.PUBLIC_STRIPE_KEY
-  : "pk_live_51NnTaCFSZsoFDEdQNHZRbpUaw7yX6bdERxsbRSphPQeDnsq3FwtEy5lkQIzNvR8uIRUDXczQjyBhMArHHfHodh3K00wdbtymnM"
+// const stripeKey = process.env.PUBLIC_STRIPE_KEY
+//   ? process.env.PUBLIC_STRIPE_KEY
+//   : "pk_live_51NnTaCFSZsoFDEdQNHZRbpUaw7yX6bdERxsbRSphPQeDnsq3FwtEy5lkQIzNvR8uIRUDXczQjyBhMArHHfHodh3K00wdbtymnM"
+const stripeKey =
+  "pk_live_51NnTaCFSZsoFDEdQNHZRbpUaw7yX6bdERxsbRSphPQeDnsq3FwtEy5lkQIzNvR8uIRUDXczQjyBhMArHHfHodh3K00wdbtymnM"
 
 export const stripePromise = stripeKey
   ? loadStripe(stripeKey)
