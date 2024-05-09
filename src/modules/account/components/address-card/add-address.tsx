@@ -93,6 +93,7 @@ const AddAddress = ({ region }: { region: Region }) => {
                   name="postal_code"
                   required
                   autoComplete="postal-code"
+                  type="number"
                 />
                 <Input
                   label="City"

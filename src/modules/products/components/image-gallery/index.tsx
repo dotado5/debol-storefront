@@ -1,48 +1,89 @@
+"use client"
+
+import React, { useEffect } from "react"
 import { Image as MedusaImage } from "@medusajs/medusa"
 import { Container } from "@medusajs/ui"
 import ImageEffect from "@modules/ImageMagnifier/ImageMagnifier"
-import ImageMagnifier from "@modules/ImageMagnifier/ImageMagnifier"
 import Image from "next/image"
+import ReactImageMagnify from "react-image-magnify"
 
 type ImageGalleryProps = {
   images: MedusaImage[]
 }
 
+// const ImageGallery = ({ images }: ImageGalleryProps) => {
+//   return (
+//     <div className="flex items-start relative">
+//       <div className="flex flex-col flex-1 small:mx-16 gap-y-4">
+//         {images.map((image, index) => {
+//           return (
+//             <Container
+//               key={image.id}
+// className="relative aspect-[29/34] w-full overflow-hidden bg-ui-bg-subtle h-full flex items-center"
+//               id={image.id}
+//             >
+//               {/* <img
+//                 src={image.url}
+//                 alt=""
+//                 className="mx-auto w-[300px] h-auto max-h-[300px] object-contain"
+//               /> */}
+//               {/*
+//               <GlassMagnifier
+//                 imageSrc="./image.jpg"
+//                 imageAlt="Example"
+//                 largeImageSrc="./large-image.jpg" // Optional
+//               /> */}
+//               {/* <ImageEffect imgSrc={image.url} /> */}
+//               <ReactImageMagnify
+//                 {...{
+//                   smallImage: {
+//                     alt: "Wristwatch by Ted Baker London",
+//                     isFluidWidth: true,
+//                     src: image.url,
+//                   },
+//                   largeImage: {
+//                     src: image.url,
+//                     width: 1200,
+//                     height: 1800,
+//                   },
+//                 }}
+//               />
+//             </Container>
+//           )
+//         })}
+//       </div>
+//     </div>
+//   )
+// }
+
 const ImageGallery = ({ images }: ImageGalleryProps) => {
   return (
     <div className="flex items-start relative">
       <div className="flex flex-col flex-1 small:mx-16 gap-y-4">
-        {images.map((image, index) => {
-          return (
-            <Container
-              key={image.id}
-              className="relative aspect-[29/34] w-full overflow-hidden bg-ui-bg-subtle h-full flex items-center"
-              id={image.id}
-            >
-              {/* <Image
-                src={image.url}
-                priority={index <= 2 ? true : false}
-                className="absolute  rounded-rounded mx-auto my-[20%] "
-                alt={`Product image ${index + 1}`}
-                // fill
-                // sizes="(max-width: 576px) 280px, (max-width: 768px) 360px, (max-width: 992px) 480px, 800px"
-                style={{
-                  objectFit: "contain",
-                }}
-                width={400}
-                height={400}
-              /> */}
-
-              {/* <img
-                src={image.url}
-                alt=""
-                className="mx-auto w-[300px] h-auto max-h-[300px] object-contain"
-              /> */}
-              {/* <ImageMagnifier src={image.url} alt={"image"} zoom={2} /> */}
-              <ImageEffect imgSrc={image.url} />
-            </Container>
-          )
-        })}
+        {images.map((image, index) => (
+          <div
+            key={index}
+            className="relative w-full h-full aspect-[29/34] flex items-center"
+          >
+            {/* overflow-hidden bg-ui-bg-subtle w-full h-full aspect-[29/34] flex items-center*/}
+            <ReactImageMagnify
+              {...{
+                smallImage: {
+                  alt: "Wristwatch by Ted Baker London",
+                  isFluidWidth: true,
+                  src: image.url,
+                },
+                largeImage: {
+                  src: image.url,
+                  width: 1129,
+                  height: 750,
+                },
+              }}
+              // className="mx-auto w-[300px] h-auto max-h-[300px] object-contain"
+              className="w-[300px] mx-auto h-auto max-h-[300px] object-contain"
+            />
+          </div>
+        ))}
       </div>
     </div>
   )
@@ -50,3 +91,19 @@ const ImageGallery = ({ images }: ImageGalleryProps) => {
 
 export default ImageGallery
 // my-[20%]
+
+{
+  /* <GlassMagnifier
+            imageSrc={image.url}
+            imageAlt="Example"
+            magnifierSize={500}
+          />
+
+          <Magnifier
+            imageSrc={image.url}
+            imageAlt="Example"
+            largeImageSrc={image.url} // Optional
+            mouseActivation={MOUSE_ACTIVATION.DOUBLE_CLICK} // Optional
+            touchActivation={TOUCH_ACTIVATION.DOUBLE_TAP} // Optional
+          /> */
+}

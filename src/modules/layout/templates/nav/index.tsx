@@ -13,12 +13,13 @@ import { IoSearch } from "react-icons/io5"
 import logo from "assets/debolslogo.jpg"
 import Image from "next/image"
 import { FaWhatsapp } from "react-icons/fa"
-import { listRegions } from "@lib/data"
+import { getCustomer, listRegions } from "@lib/data"
 import SideMenu from "@modules/layout/components/side-menu"
 import Needhelp from "modules/layout/components/need-help"
 import Translator from "@modules/Translator/translator"
 import TranslationComponent from "@modules/Translator/component/translation"
 import { ProductCollectionWithPreviews } from "types/global"
+import AccountDropdown from "@modules/layout/components/account-button"
 
 export default async function Nav({
   collections,
@@ -26,6 +27,9 @@ export default async function Nav({
   collections: ProductCollectionWithPreviews[]
 }) {
   const regions = await listRegions().then((regions) => regions)
+  const customer = await getCustomer().catch(() => null)
+
+  console.log(customer)
 
   return (
     <div className="sticky top-0 inset-x-0 z-[100000001] group">
@@ -75,13 +79,19 @@ export default async function Nav({
                   <TranslationComponent query={"Search"} />
                 </LocalizedClientLink>
               )}
-              <LocalizedClientLink
-                className="hover:text-ui-fg-base flex items-center text-base gap-2 "
-                href="/account"
-              >
-                <FiUser />
-                <TranslationComponent query={"Account"} />
-              </LocalizedClientLink>
+              {customer ? (
+                <AccountDropdown customer={customer} />
+              ) : (
+                <LocalizedClientLink
+                  className="hover:text-ui-fg-base flex items-center text-base gap-2 "
+                  href="/account"
+                >
+                  <>
+                    <FiUser />
+                    <TranslationComponent query={"Account"} />
+                  </>
+                </LocalizedClientLink>
+              )}
               <div>
                 <Needhelp />
               </div>

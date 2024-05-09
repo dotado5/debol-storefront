@@ -20,6 +20,7 @@ import { SubmitButton } from "../submit-button"
 import { useFormState } from "react-dom"
 import ErrorMessage from "../error-message"
 import compareAddresses from "@lib/util/compare-addresses"
+import { useEffect } from "react"
 
 const Addresses = ({
   cart,
@@ -48,6 +49,10 @@ const Addresses = ({
   }
 
   const [message, formAction] = useFormState(setAddresses, null)
+
+  useEffect(() => {
+    cart?.items.forEach((item) => console.log(item.unit_price, "price"))
+  }, [])
 
   return (
     <div className="bg-white">

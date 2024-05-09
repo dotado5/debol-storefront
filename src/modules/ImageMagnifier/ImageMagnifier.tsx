@@ -50,7 +50,7 @@ const ImageEffect = ({ imgSrc }: { imgSrc: string }) => {
         onMouseMove={handleMouseMove}
         className="w-80 h-96 relative overflow-hidden"
       >
-        <Image className="object-cover border z-10" alt="" src={imgSrc} fill />
+        <Image className="object-cover z-10" alt="" src={imgSrc} fill />
         <div
           style={{
             backgroundPosition: `${position.x}px ${position.y}px`,

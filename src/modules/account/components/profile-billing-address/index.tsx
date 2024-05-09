@@ -125,6 +125,7 @@ const ProfileBillingAddress: React.FC<MyInformationProps> = ({
               name="billing_address.postal_code"
               defaultValue={customer.billing_address?.postal_code || undefined}
               required
+              type="number"
             />
             <Input
               label="City"

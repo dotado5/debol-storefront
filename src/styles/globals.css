@@ -11,6 +11,10 @@ body {
   font-family: "Roboto Serif", serif;
 }
 
+img {
+  max-width: 100% !important;
+}
+
 @layer utilities {
   /* Chrome, Safari and Opera */
   .no-scrollbar::-webkit-scrollbar {

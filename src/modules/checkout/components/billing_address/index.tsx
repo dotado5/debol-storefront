@@ -89,6 +89,7 @@ const BillingAddress = ({
           value={formData["billing_address.postal_code"]}
           onChange={handleChange}
           required
+          type="number"
         />
         <Input
           label="City"

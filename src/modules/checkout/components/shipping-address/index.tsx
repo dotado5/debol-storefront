@@ -123,6 +123,7 @@ const ShippingAddress = ({
           value={formData["shipping_address.postal_code"]}
           onChange={handleChange}
           required
+          type="number"
         />
         <Input
           label="City"
