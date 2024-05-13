@@ -32,7 +32,7 @@ const Hero = async ({
         title: <TranslationComponent query={"Location: "} />,
         text: (
           <TranslationComponent
-            query={" Mustamäe tee 12, Tallinn (inside Maxima building)"}
+            query={"Tartu address: Sobra 41, 51013 Tartu"}
           />
         ),
         icon: <Image src={location} alt={""} />,
