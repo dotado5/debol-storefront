@@ -15,6 +15,7 @@ import Thumbnail from "@modules/products/components/thumbnail"
 import TranslationComponent from "@modules/Translator/component/translation"
 import { IoCartOutline } from "react-icons/io5"
 import { FiUser } from "react-icons/fi"
+import { toUpper } from "lodash"
 
 const AccountDropdown = ({
   cart: cartState,
@@ -88,7 +89,11 @@ const AccountDropdown = ({
             href="/account"
           >
             <FiUser />
-            <TranslationComponent query={`Account`} />
+            <TranslationComponent
+              query={
+                customer ? `Hello, ${toUpper(customer.first_name)}` : `Account`
+              }
+            />
           </LocalizedClientLink>
         </Popover.Button>
         <Transition
@@ -105,15 +110,11 @@ const AccountDropdown = ({
             static
             className="hidden small:block absolute top-[calc(100%+1px)] right-0 bg-white border-x border-b border-gray-200 w-[280px] text-ui-fg-base"
           >
-            <div className="p-4 flex items-center justify-center">
-              <h3 className="text-large-semi">Hello {customer.first_name}</h3>
-            </div>
-
             <div>
               <div className="flex pb-6 flex-col gap-y-4 items-center justify-center">
                 <div>
                   <LocalizedClientLink href="/account">
-                    <Button onClick={close} className="w-[200px]">
+                    <Button onClick={close} className="w-[200px] mt-[1em]">
                       View Profile
                     </Button>
                   </LocalizedClientLink>

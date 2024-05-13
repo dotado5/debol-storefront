@@ -15,6 +15,26 @@ type InputProps = Omit<
   topLabel?: string
 }
 
+export function checkInput(event: any) {
+  // const charCode = event.which ? event.which : event.keyCode
+
+  // // Allow only numeric characters (0-9) or the backspace key (keyCode 8)
+  // if ((charCode < 48 || charCode > 57) && charCode !== 8) {
+  //   event.preventDefault()
+  // }
+
+  console.log("typed", event.target.value)
+
+  const maxLength = event.target.maxLength
+  event.target.value = event.target.value.replace(/[^0-9]/g, "")
+
+  // If the length of the input value exceeds the maximum length
+  if (event.target.value.length > maxLength) {
+    // Truncate the input value to the maximum length
+    event.target.value = event.target.value.slice(0, maxLength)
+  }
+}
+
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ type, name, label, touched, required, topLabel, ...props }, ref) => {
     const inputRef = React.useRef<HTMLInputElement>(null)
@@ -33,21 +53,38 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
 
     useImperativeHandle(ref, () => inputRef.current!)
 
+    function none() {}
+
     return (
       <div className="flex flex-col w-full">
         {topLabel && (
           <Label className="mb-2 txt-compact-medium-plus">{topLabel}</Label>
         )}
         <div className="flex relative z-0 w-full txt-compact-medium">
-          <input
-            type={inputType}
-            name={name}
-            placeholder=" "
-            required={required}
-            className="pt-4 pb-1 block w-full h-11 px-4 mt-0 bg-ui-bg-field border rounded-md appearance-none focus:outline-none focus:ring-0 focus:shadow-borders-interactive-with-active border-ui-border-base hover:bg-ui-bg-field-hover"
-            {...props}
-            ref={inputRef}
-          />
+          {inputType === "number" ? (
+            <input
+              type={inputType}
+              name={name}
+              placeholder=" "
+              required={required}
+              className="pt-4 pb-1 block w-full h-11 px-4 mt-0 bg-ui-bg-field border rounded-md appearance-none focus:outline-none focus:ring-0 focus:shadow-borders-interactive-with-active border-ui-border-base hover:bg-ui-bg-field-hover"
+              ref={inputRef}
+              onChange={(e) => checkInput(e)}
+              minLength={1}
+              maxLength={5}
+              // {...props}
+            />
+          ) : (
+            <input
+              type={inputType}
+              name={name}
+              placeholder=" "
+              required={required}
+              className="pt-4 pb-1 block w-full h-11 px-4 mt-0 bg-ui-bg-field border rounded-md appearance-none focus:outline-none focus:ring-0 focus:shadow-borders-interactive-with-active border-ui-border-base hover:bg-ui-bg-field-hover"
+              {...props}
+              ref={inputRef}
+            />
+          )}
           <label
             htmlFor={name}
             onClick={() => inputRef.current?.focus()}
