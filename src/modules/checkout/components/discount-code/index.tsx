@@ -133,6 +133,7 @@ const DiscountCode: React.FC<DiscountCodeProps> = ({ cart }) => {
                     name="code"
                     type="text"
                     autoFocus={false}
+                    component={""}
                   />
                   <SubmitButton variant="secondary">Apply</SubmitButton>
                 </div>

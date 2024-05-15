@@ -63,29 +63,39 @@ const AddAddress = ({ region }: { region: Region }) => {
                   name="first_name"
                   required
                   autoComplete="given-name"
+                  component={""}
+                  type="text"
                 />
                 <Input
                   label="Last name"
                   name="last_name"
                   required
                   autoComplete="family-name"
+                  component={""}
+                  type="text"
                 />
               </div>
               <Input
                 label="Company"
                 name="company"
                 autoComplete="organization"
+                component={""}
+                type="text"
               />
               <Input
                 label="Address"
                 name="address_1"
                 required
                 autoComplete="address-line1"
+                component={""}
+                type="text"
               />
               <Input
                 label="Apartment, suite, etc."
                 name="address_2"
                 autoComplete="address-line2"
+                component={""}
+                type="text"
               />
               <div className="grid grid-cols-[144px_1fr] gap-x-2">
                 <Input
@@ -94,18 +104,23 @@ const AddAddress = ({ region }: { region: Region }) => {
                   required
                   autoComplete="postal-code"
                   type="number"
+                  component={""}
                 />
                 <Input
                   label="City"
                   name="city"
                   required
                   autoComplete="locality"
+                  component={""}
+                  type="text"
                 />
               </div>
               <Input
                 label="Province / State"
                 name="province"
                 autoComplete="address-level1"
+                component={""}
+                type="text"
               />
               <CountrySelect
                 region={region}
@@ -113,7 +128,13 @@ const AddAddress = ({ region }: { region: Region }) => {
                 required
                 autoComplete="country"
               />
-              <Input label="Phone" name="phone" autoComplete="phone" />
+              <Input
+                label="Phone"
+                name="phone"
+                autoComplete="phone"
+                component={""}
+                type="tel"
+              />
             </div>
             {formState.error && (
               <div className="text-rose-500 text-small-regular py-2">

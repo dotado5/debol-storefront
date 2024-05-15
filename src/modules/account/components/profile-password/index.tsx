@@ -48,18 +48,21 @@ const ProfileName: React.FC<MyInformationProps> = ({ customer }) => {
             name="old_password"
             required
             type="password"
+            component={"changePassword"}
           />
           <Input
             label="New password"
             type="password"
             name="new_password"
             required
+            component={"changePassword"}
           />
           <Input
             label="Confirm password"
             type="password"
             name="confirm_password"
             required
+            component={"changePassword"}
           />
         </div>
       </AccountInfo>
