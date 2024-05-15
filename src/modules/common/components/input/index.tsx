@@ -13,30 +13,22 @@ type InputProps = Omit<
   touched?: Record<string, unknown>
   name: string
   topLabel?: string
-}
-
-export function checkInput(event: any) {
-  // const charCode = event.which ? event.which : event.keyCode
-
-  // // Allow only numeric characters (0-9) or the backspace key (keyCode 8)
-  // if ((charCode < 48 || charCode > 57) && charCode !== 8) {
-  //   event.preventDefault()
-  // }
-
-  console.log("typed", event.target.value)
-
-  const maxLength = event.target.maxLength
-  event.target.value = event.target.value.replace(/[^0-9]/g, "")
-
-  // If the length of the input value exceeds the maximum length
-  if (event.target.value.length > maxLength) {
-    // Truncate the input value to the maximum length
-    event.target.value = event.target.value.slice(0, maxLength)
-  }
+  component: string
 }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ type, name, label, touched, required, topLabel, ...props }, ref) => {
+  (
+    { type, name, label, touched, required, topLabel, component, ...props },
+    ref
+  ) => {
+    const [password, setPassword] = useState("")
+    const [isValid, setIsValid] = useState({
+      length: false,
+      upperCase: false,
+      lowerCase: false,
+      number: false,
+      specialChar: false,
+    })
     const inputRef = React.useRef<HTMLInputElement>(null)
     const [showPassword, setShowPassword] = useState(false)
     const [inputType, setInputType] = useState(type)
@@ -53,7 +45,63 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
 
     useImperativeHandle(ref, () => inputRef.current!)
 
-    function none() {}
+    const validatePassword = async (e: any) => {
+      // Define your password requirements here
+
+      if (component === "register") {
+        let value: string = await e.target.value
+
+        const minLength = 8
+        const hasUpperCase = /[A-Z]/.test(value)
+        const hasLowerCase = /[a-z]/.test(value)
+        const hasNumber = /\d/.test(value)
+        const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(value)
+
+        await setIsValid({
+          ...isValid,
+          length: value.length >= minLength,
+          upperCase: hasUpperCase,
+          lowerCase: hasLowerCase,
+          number: hasNumber,
+          specialChar: hasSpecialChar,
+        })
+      }
+
+      // console.log(isValid)
+    }
+
+    function checkInput(event: any, type: string) {
+      // console.log("typed", event.target.value)
+
+      const maxLength = event.target.maxLength
+
+      if (type === "number") {
+        event.target.value = event.target.value.replace(/[^0-9]/g, "")
+        // If the length of the input value exceeds the maximum length
+        if (event.target.value.length > maxLength) {
+          // Truncate the input value to the maximum length
+          event.target.value = event.target.value.slice(0, maxLength)
+        }
+      }
+
+      if (type === "text") {
+        if (
+          label === "First name" ||
+          label === "Last name" ||
+          label === "City"
+        ) {
+          console.log("here", label)
+          event.target.value = event.target.value.replace(/[^a-zA-Z]/g, "")
+        }
+      }
+
+      if (type === "tel") {
+        if (event.target.value.length > maxLength) {
+          // Truncate the input value to the maximum length
+          event.target.value = event.target.value.slice(0, maxLength)
+        }
+      }
+    }
 
     return (
       <div className="flex flex-col w-full">
@@ -69,10 +117,45 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
               required={required}
               className="pt-4 pb-1 block w-full h-11 px-4 mt-0 bg-ui-bg-field border rounded-md appearance-none focus:outline-none focus:ring-0 focus:shadow-borders-interactive-with-active border-ui-border-base hover:bg-ui-bg-field-hover"
               ref={inputRef}
-              onChange={(e) => checkInput(e)}
+              onChange={(e) => checkInput(e, "number")}
               minLength={1}
               maxLength={5}
               // {...props}
+            />
+          ) : inputType === "password" ? (
+            <input
+              type={inputType}
+              name={name}
+              placeholder=" "
+              required={required}
+              className="pt-4 pb-1 block w-full h-11 px-4 mt-0 bg-ui-bg-field border rounded-md appearance-none focus:outline-none focus:ring-0 focus:shadow-borders-interactive-with-active border-ui-border-base hover:bg-ui-bg-field-hover"
+              ref={inputRef}
+              onChange={validatePassword}
+              // {...props}
+            />
+          ) : inputType === "text" ? (
+            <input
+              type={inputType}
+              name={name}
+              placeholder=" "
+              required={required}
+              className="pt-4 pb-1 block w-full h-11 px-4 mt-0 bg-ui-bg-field border rounded-md appearance-none focus:outline-none focus:ring-0 focus:shadow-borders-interactive-with-active border-ui-border-base hover:bg-ui-bg-field-hover"
+              // {...props}
+              ref={inputRef}
+              onChange={(e) => checkInput(e, "text")}
+            />
+          ) : inputType === "tel" ? (
+            <input
+              type={inputType}
+              name={name}
+              placeholder=" "
+              required={required}
+              className="pt-4 pb-1 block w-full h-11 px-4 mt-0 bg-ui-bg-field border rounded-md appearance-none focus:outline-none focus:ring-0 focus:shadow-borders-interactive-with-active border-ui-border-base hover:bg-ui-bg-field-hover"
+              // {...props}
+              ref={inputRef}
+              onChange={(e) => checkInput(e, "tel")}
+              minLength={8}
+              maxLength={8}
             />
           ) : (
             <input

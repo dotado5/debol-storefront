@@ -16,6 +16,8 @@ type Props = {
 const Register = ({ setCurrentView }: Props) => {
   const [message, formAction] = useFormState(signUp, null)
 
+  // console.log(formAction)
+
   return (
     <div className="max-w-sm flex flex-col items-center">
       <h1 className="text-large-semi uppercase mb-6">
@@ -32,12 +34,14 @@ const Register = ({ setCurrentView }: Props) => {
             name="first_name"
             required
             autoComplete="given-name"
+            component={"register"}
           />
           <Input
             label="Last name"
             name="last_name"
             required
             autoComplete="family-name"
+            component={"register"}
           />
           <Input
             label="Email"
@@ -45,14 +49,30 @@ const Register = ({ setCurrentView }: Props) => {
             required
             type="email"
             autoComplete="email"
+            component={"register"}
           />
-          <Input label="Phone" name="phone" type="tel" autoComplete="tel" />
+          <Input
+            label="Phone"
+            name="phone"
+            type="tel"
+            autoComplete="tel"
+            component={"register"}
+          />
           <Input
             label="Password"
             name="password"
             required
             type="password"
             autoComplete="new-password"
+            component={"register"}
+          />
+          <Input
+            label="Confirm Password"
+            name="password"
+            required
+            type="password"
+            autoComplete="new-password"
+            component={"register"}
           />
         </div>
         <ErrorMessage error={message} />
@@ -62,8 +82,9 @@ const Register = ({ setCurrentView }: Props) => {
             href="/content/privacy-policy"
             className="underline"
           >
+            {" "}
             Privacy Policy
-          </LocalizedClientLink>{" "}
+          </LocalizedClientLink>
           and{" "}
           <LocalizedClientLink
             href="/content/terms-of-use"

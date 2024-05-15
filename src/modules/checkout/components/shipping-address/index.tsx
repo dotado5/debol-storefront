@@ -92,6 +92,8 @@ const ShippingAddress = ({
           value={formData["shipping_address.first_name"]}
           onChange={handleChange}
           required
+          component={""}
+          type="text"
         />
         <Input
           label="Last name"
@@ -100,6 +102,8 @@ const ShippingAddress = ({
           value={formData["shipping_address.last_name"]}
           onChange={handleChange}
           required
+          component={""}
+          type="text"
         />
         <Input
           label="Address"
@@ -108,6 +112,8 @@ const ShippingAddress = ({
           value={formData["shipping_address.address_1"]}
           onChange={handleChange}
           required
+          component={""}
+          type="text"
         />
         <Input
           label="Company"
@@ -115,6 +121,8 @@ const ShippingAddress = ({
           value={formData["shipping_address.company"]}
           onChange={handleChange}
           autoComplete="organization"
+          component={""}
+          type="text"
         />
         <Input
           label="Postal code"
@@ -124,6 +132,7 @@ const ShippingAddress = ({
           onChange={handleChange}
           required
           type="number"
+          component={""}
         />
         <Input
           label="City"
@@ -132,6 +141,8 @@ const ShippingAddress = ({
           value={formData["shipping_address.city"]}
           onChange={handleChange}
           required
+          component={""}
+          type="text"
         />
         <CountrySelect
           name="shipping_address.country_code"
@@ -147,6 +158,8 @@ const ShippingAddress = ({
           autoComplete="address-level1"
           value={formData["shipping_address.province"]}
           onChange={handleChange}
+          component={""}
+          type="text"
         />
       </div>
       <div className="my-8">
@@ -167,6 +180,7 @@ const ShippingAddress = ({
           value={formData.email}
           onChange={handleChange}
           required
+          component={""}
         />
         <Input
           label="Phone"
@@ -174,6 +188,8 @@ const ShippingAddress = ({
           autoComplete="tel"
           value={formData["shipping_address.phone"]}
           onChange={handleChange}
+          component={""}
+          type="tel"
         />
       </div>
     </>

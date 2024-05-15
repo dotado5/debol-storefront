@@ -58,6 +58,8 @@ const BillingAddress = ({
           value={formData["billing_address.first_name"]}
           onChange={handleChange}
           required
+          component={""}
+          type="text"
         />
         <Input
           label="Last name"
@@ -66,6 +68,8 @@ const BillingAddress = ({
           value={formData["billing_address.last_name"]}
           onChange={handleChange}
           required
+          component={""}
+          type="text"
         />
         <Input
           label="Address"
@@ -74,6 +78,8 @@ const BillingAddress = ({
           value={formData["billing_address.address_1"]}
           onChange={handleChange}
           required
+          component={""}
+          type="text"
         />
         <Input
           label="Company"
@@ -81,6 +87,8 @@ const BillingAddress = ({
           value={formData["billing_address.company"]}
           onChange={handleChange}
           autoComplete="organization"
+          component={""}
+          type="text"
         />
         <Input
           label="Postal code"
@@ -90,6 +98,7 @@ const BillingAddress = ({
           onChange={handleChange}
           required
           type="number"
+          component={""}
         />
         <Input
           label="City"
@@ -98,6 +107,8 @@ const BillingAddress = ({
           value={formData["billing_address.city"]}
           onChange={handleChange}
           required
+          component={""}
+          type="text"
         />
         <CountrySelect
           name="billing_address.country_code"
@@ -113,6 +124,7 @@ const BillingAddress = ({
           autoComplete="address-level1"
           value={formData["billing_address.province"]}
           onChange={handleChange}
+          component={""}
         />
         <Input
           label="Phone"
@@ -120,6 +132,8 @@ const BillingAddress = ({
           autoComplete="tel"
           value={formData["billing_address.phone"]}
           onChange={handleChange}
+          component={""}
+          type="tel"
         />
       </div>
     </>

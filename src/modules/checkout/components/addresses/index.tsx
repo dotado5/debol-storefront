@@ -20,7 +20,7 @@ import { SubmitButton } from "../submit-button"
 import { useFormState } from "react-dom"
 import ErrorMessage from "../error-message"
 import compareAddresses from "@lib/util/compare-addresses"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 
 const Addresses = ({
   cart,
@@ -33,6 +33,7 @@ const Addresses = ({
   const router = useRouter()
   const pathname = usePathname()
   const params = useParams()
+  const [notKg, setNotKg] = useState<boolean>(false)
 
   const countryCode = params.countryCode as string
 
@@ -51,10 +52,47 @@ const Addresses = ({
   const [message, formAction] = useFormState(setAddresses, null)
 
   useEffect(() => {
-    cart?.items.forEach((item) => console.log(item.unit_price, "price"))
+    async function check() {
+      const containsString = await cart?.items.some((item) =>
+        item.variant.title.includes("kg")
+      )
+
+      // await setNotKg(containsString)
+    }
+
+    check()
   }, [])
 
-  return (
+  useEffect(() => {
+    const handleClickOutside = (event: any) => {
+      if (notKg && !event.target.closest(".popup")) {
+        // Close the popup if clicked outside of it
+        setNotKg(false)
+      }
+    }
+
+    // Add event listener when the popup is open
+    if (notKg) {
+      document.addEventListener("mousedown", handleClickOutside)
+    } else {
+      // Remove event listener when the popup is closed to avoid memory leaks
+      document.removeEventListener("mousedown", handleClickOutside)
+    }
+
+    return () => {
+      // Clean up the event listener when the component unmounts
+      document.removeEventListener("mousedown", handleClickOutside)
+    }
+  }, [notKg])
+
+  const backToCart = () => {
+    setNotKg(false)
+    router.back()
+  }
+
+  const goToWhatsApp = () => {}
+
+  return !notKg ? (
     <div className="bg-white">
       <div className="flex flex-row items-center justify-between mb-6">
         <Heading
@@ -181,6 +219,32 @@ const Addresses = ({
         </div>
       )}
       <Divider className="mt-8" />
+    </div>
+  ) : (
+    <div className="w-[400px] ">
+      <div className="overlay"></div>
+      <div className="popup">
+        <div className="popup-content">
+          <h2>Dear Customer</h2>
+          <p className="font-bold">
+            All kg products can only be ordered via the whatsapp
+          </p>
+          <div className="flex gap-2 mx-[11%]">
+            <button
+              onClick={backToCart}
+              className="bg-[#007bff] hover:bg-[#0056b3]"
+            >
+              Go back to Cart
+            </button>
+            <button
+              onClick={goToWhatsApp}
+              className="bg-green-700 hover:bg-green-950"
+            >
+              Go to Whatsapp
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }
