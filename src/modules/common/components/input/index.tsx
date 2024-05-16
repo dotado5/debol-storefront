@@ -3,6 +3,8 @@ import React, { useEffect, useImperativeHandle, useState } from "react"
 
 import Eye from "@modules/common/icons/eye"
 import EyeOff from "@modules/common/icons/eye-off"
+import { IoMdCheckmark } from "react-icons/io"
+import { FaXmark } from "react-icons/fa6"
 
 type InputProps = Omit<
   Omit<React.InputHTMLAttributes<HTMLInputElement>, "size">,
@@ -21,17 +23,19 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     { type, name, label, touched, required, topLabel, component, ...props },
     ref
   ) => {
-    const [password, setPassword] = useState("")
-    const [isValid, setIsValid] = useState({
-      length: false,
-      upperCase: false,
-      lowerCase: false,
-      number: false,
-      specialChar: false,
+    const [passRequirements, setPassRequirements] = useState({
+      minLength: false,
+      hasUpperCase: false,
+      hasLowerCase: false,
+      hasNumber: false,
+      hasSpecialChar: false,
     })
+    const [isValid, setIsValid] = useState(false)
     const inputRef = React.useRef<HTMLInputElement>(null)
     const [showPassword, setShowPassword] = useState(false)
     const [inputType, setInputType] = useState(type)
+    const [validation, setValidation] = useState(false)
+    const [notEqual, setNotEqual] = useState(false)
 
     useEffect(() => {
       if (type === "password" && showPassword) {
@@ -48,26 +52,53 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     const validatePassword = async (e: any) => {
       // Define your password requirements here
 
-      if (component === "register") {
+      if (component === "register" && label === "Password") {
         let value: string = await e.target.value
 
         const minLength = 8
         const hasUpperCase = /[A-Z]/.test(value)
         const hasLowerCase = /[a-z]/.test(value)
-        const hasNumber = /\d/.test(value)
-        const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(value)
+        const hasNumber = /[0-9]/.test(value)
+        const hasSpecialChar = /[!@#$%^&*.,]/.test(value)
 
-        await setIsValid({
-          ...isValid,
-          length: value.length >= minLength,
-          upperCase: hasUpperCase,
-          lowerCase: hasLowerCase,
-          number: hasNumber,
-          specialChar: hasSpecialChar,
+        await setPassRequirements({
+          ...passRequirements,
+          minLength: value.length >= minLength,
+          hasUpperCase: hasUpperCase,
+          hasLowerCase: hasLowerCase,
+          hasNumber: hasNumber,
+          hasSpecialChar: hasSpecialChar,
         })
+
+        await setIsValid(
+          value.length >= minLength &&
+            hasUpperCase &&
+            hasLowerCase &&
+            hasNumber &&
+            hasSpecialChar
+        )
+
+        console.log(isValid)
       }
 
-      // console.log(isValid)
+      if (label === "Confirm Password") {
+        comparePasswords(e.target.value)
+      }
+    }
+
+    function comparePasswords(text: string) {
+      let password = label === "Password" && text
+      let confirm = label === "Confirm Password" && text
+
+      if (password !== confirm) {
+        setNotEqual(!notEqual)
+      }
+    }
+
+    function passwordWarning() {
+      if (label === "Password" && component === "register") {
+        setValidation(!validation)
+      }
     }
 
     function checkInput(event: any, type: string) {
@@ -108,6 +139,55 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         {topLabel && (
           <Label className="mb-2 txt-compact-medium-plus">{topLabel}</Label>
         )}
+
+        {validation && (
+          <div className="password-popup w-[400px] mt-[-3em]">
+            <p className="font-bold">Password must contain:</p>
+            <ul>
+              <li className="flex items-center gap-2">
+                {passRequirements.minLength ? (
+                  <IoMdCheckmark className="text-green-600" />
+                ) : (
+                  <FaXmark className="text-red-600" />
+                )}
+                <p>Minimum of 8 characters</p>
+              </li>
+              <li className="flex items-center gap-2 ">
+                {passRequirements.hasUpperCase ? (
+                  <IoMdCheckmark className="text-green-600" />
+                ) : (
+                  <FaXmark className="text-red-600" />
+                )}
+                <p>At least an uppercase character</p>
+              </li>
+              <li className="flex items-center gap-2 ">
+                {passRequirements.hasLowerCase ? (
+                  <IoMdCheckmark className="text-green-600" />
+                ) : (
+                  <FaXmark className="text-red-600" />
+                )}
+                <p>At least a lowercase character</p>
+              </li>
+              <li className="flex items-center gap-2 ">
+                {passRequirements.hasNumber ? (
+                  <IoMdCheckmark className="text-green-600" />
+                ) : (
+                  <FaXmark className="text-red-600" />
+                )}
+                <p>At least one digit</p>
+              </li>
+              <li className="flex items-center gap-2 ">
+                {passRequirements.hasSpecialChar ? (
+                  <IoMdCheckmark className="text-green-600" />
+                ) : (
+                  <FaXmark className="text-red-600" />
+                )}
+                <p>At least one special character from [!@#$%^&*.,]</p>
+              </li>
+            </ul>
+          </div>
+        )}
+
         <div className="flex relative z-0 w-full txt-compact-medium">
           {inputType === "number" ? (
             <input
@@ -131,6 +211,8 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
               className="pt-4 pb-1 block w-full h-11 px-4 mt-0 bg-ui-bg-field border rounded-md appearance-none focus:outline-none focus:ring-0 focus:shadow-borders-interactive-with-active border-ui-border-base hover:bg-ui-bg-field-hover"
               ref={inputRef}
               onChange={validatePassword}
+              onFocus={passwordWarning}
+              onBlur={passwordWarning}
               // {...props}
             />
           ) : inputType === "text" ? (
@@ -186,6 +268,11 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             </button>
           )}
         </div>
+        {notEqual && (
+          <div className="absolute bottom-[-1.5em] text-red-600 z-[100001] text-sm">
+            Passwords do not match!
+          </div>
+        )}
       </div>
     )
   }

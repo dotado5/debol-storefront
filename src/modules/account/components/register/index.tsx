@@ -28,7 +28,7 @@ const Register = ({ setCurrentView }: Props) => {
         enhanced shopping experience.
       </p>
       <form className="w-full flex flex-col" action={formAction}>
-        <div className="flex flex-col w-full gap-y-2">
+        <div className="flex flex-col w-full gap-y-2 relative">
           <Input
             label="First name"
             name="first_name"
