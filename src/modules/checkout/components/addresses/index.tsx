@@ -33,7 +33,7 @@ const Addresses = ({
   const router = useRouter()
   const pathname = usePathname()
   const params = useParams()
-  const [notKg, setNotKg] = useState<boolean>(false)
+  const [notKg, setNotKg] = useState<boolean>()
 
   const countryCode = params.countryCode as string
 
@@ -57,7 +57,7 @@ const Addresses = ({
         item.variant.title.includes("kg")
       )
 
-      // await setNotKg(containsString)
+      await setNotKg(containsString)
     }
 
     check()
