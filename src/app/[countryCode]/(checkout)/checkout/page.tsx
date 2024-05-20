@@ -8,6 +8,7 @@ import Wrapper from "@modules/checkout/components/payment-wrapper"
 import CheckoutForm from "@modules/checkout/templates/checkout-form"
 import CheckoutSummary from "@modules/checkout/templates/checkout-summary"
 import { getCart } from "@lib/data"
+import { getCollectionsWithProducts } from "app/[countryCode]/(main)/page"
 
 export const metadata: Metadata = {
   title: "Checkout",
@@ -30,17 +31,22 @@ const fetchCart = async () => {
   return cart
 }
 
-export default async function Checkout() {
+export default async function Checkout({
+  params: { countryCode },
+}: {
+  params: { countryCode: string }
+}) {
   const cart = await fetchCart()
+  const collections = await getCollectionsWithProducts(countryCode)
 
-  if (!cart) {
+  if (!cart || !collections) {
     return notFound()
   }
 
   return (
     <div className="grid grid-cols-1 small:grid-cols-[1fr_416px] content-container gap-x-40 py-12">
       <Wrapper cart={cart}>
-        <CheckoutForm />
+        <CheckoutForm collections={collections} />
       </Wrapper>
       <CheckoutSummary />
     </div>

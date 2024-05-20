@@ -18,4 +18,3 @@ export default function RootLayout(props: { children: React.ReactNode }) {
     </html>
   )
 }
-// bg-[#b58978]

@@ -78,6 +78,10 @@ const ImageGallery = ({ images }: ImageGalleryProps) => {
                   width: 1129,
                   height: 750,
                 },
+                enlargedImageContainerDimensions: {
+                  width: "200%",
+                  height: "100%",
+                },
               }}
               // className="mx-auto w-[300px] h-auto max-h-[300px] object-contain"
               className="w-[300px] mx-auto h-auto max-h-[300px] object-contain"

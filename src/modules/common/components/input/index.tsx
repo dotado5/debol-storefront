@@ -127,6 +127,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       }
 
       if (type === "tel") {
+        event.target.value = event.target.value.replace(/[^0-9+]/g, "")
         if (event.target.value.length > maxLength) {
           // Truncate the input value to the maximum length
           event.target.value = event.target.value.slice(0, maxLength)

@@ -8,10 +8,17 @@ import {
   listShippingMethods,
 } from "@lib/data"
 import { cookies } from "next/headers"
-import { CartWithCheckoutStep } from "types/global"
+import {
+  CartWithCheckoutStep,
+  ProductCollectionWithPreviews,
+} from "types/global"
 import { getCheckoutStep } from "@lib/util/get-checkout-step"
 
-export default async function CheckoutForm() {
+export default async function CheckoutForm({
+  collections,
+}: {
+  collections: ProductCollectionWithPreviews[]
+}) {
   const cartId = cookies().get("_medusa_cart_id")?.value
 
   if (!cartId) {
@@ -45,7 +52,11 @@ export default async function CheckoutForm() {
     <div>
       <div className="w-full grid grid-cols-1 gap-y-8">
         <div>
-          <Addresses cart={cart} customer={customer} />
+          <Addresses
+            cart={cart}
+            customer={customer}
+            collections={collections}
+          />
         </div>
 
         <div>

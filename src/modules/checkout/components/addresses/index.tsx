@@ -21,19 +21,22 @@ import { useFormState } from "react-dom"
 import ErrorMessage from "../error-message"
 import compareAddresses from "@lib/util/compare-addresses"
 import { useEffect, useState } from "react"
+import { ProductCollectionWithPreviews, ProductPreviewType } from "types/global"
 
 const Addresses = ({
   cart,
   customer,
+  collections,
 }: {
   cart: Omit<Cart, "refundable_amount" | "refunded_total"> | null
   customer: Omit<Customer, "password_hash"> | null
+  collections: ProductCollectionWithPreviews[]
 }) => {
   const searchParams = useSearchParams()
   const router = useRouter()
   const pathname = usePathname()
   const params = useParams()
-  const [notKg, setNotKg] = useState<boolean>()
+  const [hasTubers, setHasTubers] = useState<boolean>()
 
   const countryCode = params.countryCode as string
 
@@ -52,12 +55,25 @@ const Addresses = ({
   const [message, formAction] = useFormState(setAddresses, null)
 
   useEffect(() => {
-    async function check() {
-      const containsString = await cart?.items.some((item) =>
-        item.variant.title.includes("kg")
-      )
+    // console.log(collections)
 
-      await setNotKg(containsString)
+    async function check() {
+      const titles = cart?.items
+        ? await Promise.all(cart.items.map(async (item) => item.title))
+        : []
+
+      await collections.map((collection: ProductCollectionWithPreviews) => {
+        collection.products.map((product: ProductPreviewType) => {
+          // console.log(titles, "titles")
+          cart?.items.map(async (item) => {
+            if (item.title === product.title) {
+              if (collection.title === "Tubers and Plantains") {
+                setHasTubers(true)
+              }
+            }
+          })
+        })
+      })
     }
 
     check()
@@ -65,14 +81,14 @@ const Addresses = ({
 
   useEffect(() => {
     const handleClickOutside = (event: any) => {
-      if (notKg && !event.target.closest(".popup")) {
-        // Close the popup if clicked outside of it
-        setNotKg(false)
+      if (hasTubers && !event.target.closest(".popup")) {
+        // Close the  if clicked outside of it
+        setHasTubers(false)
       }
     }
 
     // Add event listener when the popup is open
-    if (notKg) {
+    if (hasTubers) {
       document.addEventListener("mousedown", handleClickOutside)
     } else {
       // Remove event listener when the popup is closed to avoid memory leaks
@@ -83,16 +99,16 @@ const Addresses = ({
       // Clean up the event listener when the component unmounts
       document.removeEventListener("mousedown", handleClickOutside)
     }
-  }, [notKg])
+  }, [hasTubers])
 
   const backToCart = () => {
-    setNotKg(false)
+    setHasTubers(false)
     router.back()
   }
 
   const goToWhatsApp = () => {}
 
-  return !notKg ? (
+  return !hasTubers ? (
     <div className="bg-white">
       <div className="flex flex-row items-center justify-between mb-6">
         <Heading
@@ -226,8 +242,9 @@ const Addresses = ({
       <div className="popup">
         <div className="popup-content">
           <h2>Dear Customer</h2>
-          <p className="font-bold">
-            All kg products can only be ordered via the whatsapp
+          <p className="font-bold w-[400px] text-center">
+            Products in the Tuber and Plantain collection can only be ordered
+            via whatsapp
           </p>
           <div className="flex gap-2 mx-[11%]">
             <button
