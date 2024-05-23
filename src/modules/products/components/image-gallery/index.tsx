@@ -83,8 +83,7 @@ const ImageGallery = ({ images }: ImageGalleryProps) => {
                   height: "100%",
                 },
               }}
-              // className="mx-auto w-[300px] h-auto max-h-[300px] object-contain"
-              className="w-[300px] mx-auto h-auto max-h-[300px] object-contain"
+              className="galleryImage mx-auto h-auto max-h-[300px] object-contain"
             />
           </div>
         ))}
@@ -94,20 +93,3 @@ const ImageGallery = ({ images }: ImageGalleryProps) => {
 }
 
 export default ImageGallery
-// my-[20%]
-
-{
-  /* <GlassMagnifier
-            imageSrc={image.url}
-            imageAlt="Example"
-            magnifierSize={500}
-          />
-
-          <Magnifier
-            imageSrc={image.url}
-            imageAlt="Example"
-            largeImageSrc={image.url} // Optional
-            mouseActivation={MOUSE_ACTIVATION.DOUBLE_CLICK} // Optional
-            touchActivation={TOUCH_ACTIVATION.DOUBLE_TAP} // Optional
-          /> */
-}

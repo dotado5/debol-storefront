@@ -6,6 +6,7 @@ import whiteLogo from "assets/logo_white.svg"
 import advertWoman from "assets/advert_woman.svg"
 import Translator from "@modules/Translator/translator"
 import TranslationComponent from "@modules/Translator/component/translation"
+import deliveryMan from "assets/delivery_man.svg"
 
 interface ContentIcons {
   title: any
@@ -56,29 +57,28 @@ export const CustomCard: React.FC<CardProps> = ({ content }) => {
 }
 
 export const BonusCard = () => {
+  // Enjoy free delivery for orders
   return (
-    <div className="bonusCard hidden lg:flex w-full medium:w-full md:mx-0 h-full ">
-      <div className="z-[10000001]">
+    <div className="bonusCard hidden lg:flex w-full medium:w-full md:mx-0 h-full items-center ">
+      <div className="z-[10000001] w-1/2">
         <Image src={whiteLogo} alt={""} width={100} height={50} />
-        <h1 className="text-4xl p-0 text-white font-bold ml-1 mt-[1em] md:mt-[-0.05px] medium:mt-0">
+        <h1 className="text-2xl p-0 text-white font-bold ml-1 mt-[1em] md:mt-[-0.05px] medium:mt-0">
           <TranslationComponent query={"Africa & Asia"} />
         </h1>
-        <h4 className="text-white font-bold ml-1 text-xl">
+        <h4 className="text-white font-bold ml-1 text-base">
           <TranslationComponent query={"Store"} />
         </h4>
         <p className="text-base lg:text-xs text-white ml-1 w-full">
           <TranslationComponent
-            query={
-              "Explore African and Asian wonders with our curated collection."
-            }
+            query={"Enjoy free delivery for orders over 35 Euros"}
           />
         </p>
       </div>
-      <div className=" z-[10000001] ">
+      <div className=" z-[10000001] place-items-end mt-[4em]">
         <Image
           src={advertWoman}
           alt={""}
-          className=" ml-0 rounded-br-2xl mt-0 medium:mt-[-3.2em] w-[300px] h-[200px] medium:w-[400px] medium:h-[300px]"
+          className=" ml-0 rounded-br-2xl mt-0 "
           // width={400}
           // height={400}
         />

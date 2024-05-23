@@ -15,6 +15,7 @@ import legumes from "assets/slidesImages/legumes.svg"
 import SliderBox from "./sliderBox"
 import TranslationComponent from "@modules/Translator/component/translation"
 import deliveryMan from "assets/delivery_man.svg"
+import advertWoman from "assets/advert_woman.svg"
 
 const BannerSlider = ({
   collections,
@@ -93,6 +94,20 @@ const BannerSlider = ({
       buttonClassName: "border-[#E0D8CC] bg-white text-[#415315]",
       buttonContent: <TranslationComponent query={"SHOP NOW"} />,
       className: "slider6",
+      path: "/store",
+    },
+    {
+      image: advertWoman,
+      title: (
+        <TranslationComponent query={"Explore African and Asian wonders "} />
+      ),
+      description: (
+        <TranslationComponent query={"with our curated collection."} />
+      ),
+      textColor: "white",
+      buttonClassName: "border-[#E0D8CC] bg-white text-[#415315]",
+      buttonContent: <TranslationComponent query={"SHOP NOW"} />,
+      className: "slider4",
       path: "/store",
     },
   ]

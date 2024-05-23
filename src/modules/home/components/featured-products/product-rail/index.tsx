@@ -28,7 +28,7 @@ export default function ProductRail({
           <TranslationComponent query={collection.title} />
         </Text>
         <InteractiveLink href={`/collections/${collection.handle}`}>
-          View all
+          <TranslationComponent query={"View all"} />
         </InteractiveLink>
       </div>
       <ul className="grid grid-cols-2 small:grid-cols-4 gap-x-6 gap-y-7 small:gap-y-10">

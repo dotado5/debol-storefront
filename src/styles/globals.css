@@ -675,3 +675,7 @@ img {
 .validationList {
   list-style: square;
 }
+
+.galleryImage {
+  width: 400px !important;
+}

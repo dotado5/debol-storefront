@@ -6,6 +6,7 @@ import {
 } from "@lib/data"
 import { Product } from "@medusajs/medusa"
 import { Text } from "@medusajs/ui"
+import TranslationComponent from "@modules/Translator/component/translation"
 import InteractiveLink from "@modules/common/components/interactive-link"
 import ProductPreview from "@modules/products/components/product-preview"
 import { Pagination } from "@modules/store/components/pagination"
@@ -136,7 +137,7 @@ export default async function PaginatedProducts({
             <div className="flex justify-between mb-4 mt-6">
               <Text className="txt-xlarge">{collection.title}</Text>
               <InteractiveLink href={`/collections/${collection.handle}`}>
-                View all
+                <TranslationComponent query={"View all"} />
               </InteractiveLink>
             </div>
             <ul className="grid grid-cols-2 w-full small:grid-cols-3 medium:grid-cols-4 gap-x-6 gap-y-8">
