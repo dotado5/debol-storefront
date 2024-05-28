@@ -31,7 +31,8 @@ export const CustomCard: React.FC<CardProps> = ({ content }) => {
             >
               {item.icon}
               <p className="flex flex-col font-bold">
-                {item.title} <span className="font-normal">{item.text}</span>
+                {item.title}{" "}
+                <span className="font-normal text-sm">{item.text}</span>
               </p>
             </div>
           ))}
