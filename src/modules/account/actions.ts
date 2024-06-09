@@ -6,6 +6,7 @@ import {
   createCustomer,
   deleteShippingAddress,
   getToken,
+  getTokenByGoogleAuth,
   updateCustomer,
   updateShippingAddress,
 } from "@lib/data"
@@ -50,6 +51,21 @@ export async function logCustomerIn(
 
   try {
     await getToken({ email, password }).then(() => {
+      revalidateTag("customer")
+    })
+  } catch (error: any) {
+    return error.toString()
+  }
+}
+export async function logCustomerInByGoogleAuth(
+  _currentState: unknown,
+email: string
+) {
+  // const email = formData.get("email") as string
+  // const password = formData.get("password") as string
+
+  try {
+    await getTokenByGoogleAuth(email).then(() => {
       revalidateTag("customer")
     })
   } catch (error: any) {

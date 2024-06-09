@@ -36,6 +36,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     const [inputType, setInputType] = useState(type)
     const [validation, setValidation] = useState(false)
     const [notEqual, setNotEqual] = useState(false)
+    const [estoniaAddress, setEstonia] = useState(true)
 
     useEffect(() => {
       if (type === "password" && showPassword) {
@@ -135,8 +136,23 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       }
     }
 
+    function checkAddress(text: string) {
+      // console.log("address")
+
+      if (text.includes("Estonia") || text.includes("estonia")) {
+        setEstonia(true)
+      } else {
+        setEstonia(false)
+      }
+
+      if (text.includes("Talinn") || text.includes("talinn")) {
+        window.localStorage.setItem("Talinn", "Talinn")
+        console.log("set Talinn")
+      }
+    }
+
     return (
-      <div className="flex flex-col w-full">
+      <div className={`${!estoniaAddress && "relative"} flex flex-col w-full`}>
         {topLabel && (
           <Label className="mb-2 txt-compact-medium-plus">{topLabel}</Label>
         )}
@@ -188,6 +204,13 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             </ul>
           </div>
         )}
+        {!estoniaAddress && (
+          <div className="password-popup w-[400px] mt-[-3em]">
+            <p className="font-bold">
+              Delivery is not allowed for places outside Estonia
+            </p>
+          </div>
+        )}
 
         <div className="flex relative z-0 w-full txt-compact-medium">
           {inputType === "number" ? (
@@ -217,16 +240,29 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
               // {...props}
             />
           ) : inputType === "text" ? (
-            <input
-              type={inputType}
-              name={name}
-              placeholder=" "
-              required={required}
-              className="pt-4 pb-1 block w-full h-11 px-4 mt-0 bg-ui-bg-field border rounded-md appearance-none focus:outline-none focus:ring-0 focus:shadow-borders-interactive-with-active border-ui-border-base hover:bg-ui-bg-field-hover"
-              // {...props}
-              ref={inputRef}
-              onChange={(e) => checkInput(e, "text")}
-            />
+            name === "shipping_address.address_1" ? (
+              <input
+                type={inputType}
+                name={name}
+                placeholder=""
+                required={required}
+                className="pt-4 pb-1 block w-full h-11 px-4 mt-0 bg-ui-bg-field border rounded-md appearance-none focus:outline-none focus:ring-0 focus:shadow-borders-interactive-with-active border-ui-border-base hover:bg-ui-bg-field-hover"
+                // {...props}
+                ref={inputRef}
+                onChange={(e) => checkAddress(e.target.value)}
+              />
+            ) : (
+              <input
+                type={inputType}
+                name={name}
+                placeholder=" "
+                required={required}
+                className="pt-4 pb-1 block w-full h-11 px-4 mt-0 bg-ui-bg-field border rounded-md appearance-none focus:outline-none focus:ring-0 focus:shadow-borders-interactive-with-active border-ui-border-base hover:bg-ui-bg-field-hover"
+                // {...props}
+                ref={inputRef}
+                onChange={(e) => checkInput(e, "text")}
+              />
+            )
           ) : inputType === "tel" ? (
             <input
               type={inputType}

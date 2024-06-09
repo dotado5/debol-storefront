@@ -9,10 +9,8 @@ import {
 import { Cart, Customer } from "@medusajs/medusa"
 import { CheckCircleSolid } from "@medusajs/icons"
 import { Heading, Text, useToggleState } from "@medusajs/ui"
-
 import Divider from "@modules/common/components/divider"
 import Spinner from "@modules/common/icons/spinner"
-
 import BillingAddress from "../billing_address"
 import ShippingAddress from "../shipping-address"
 import { setAddresses } from "../../actions"
@@ -22,6 +20,9 @@ import ErrorMessage from "../error-message"
 import compareAddresses from "@lib/util/compare-addresses"
 import { useEffect, useState } from "react"
 import { ProductCollectionWithPreviews, ProductPreviewType } from "types/global"
+import React from "react"
+import { ToastContainer, toast } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
 
 const Addresses = ({
   cart,
@@ -53,9 +54,14 @@ const Addresses = ({
   }
 
   const [message, formAction] = useFormState(setAddresses, null)
+  const notify = () =>
+    toast(
+      "Orders above 35 euros are delivered for free for delivery orders in Talinn"
+    )
 
   useEffect(() => {
-    // console.log(collections)
+    // console.log(cart)
+    notify()
 
     async function check() {
       const titles = cart?.items
@@ -108,8 +114,16 @@ const Addresses = ({
 
   const goToWhatsApp = () => {}
 
+  function checkTalinn() {
+    console.log("checkTal")
+    if (window.localStorage.getItem("Talinn")) {
+    }
+  }
+
   return !hasTubers ? (
     <div className="bg-white">
+      <ToastContainer position="top-center" />
+
       <div className="flex flex-row items-center justify-between mb-6">
         <Heading
           level="h2"
@@ -152,7 +166,9 @@ const Addresses = ({
                 <BillingAddress cart={cart} countryCode={countryCode} />
               </div>
             )}
-            <SubmitButton className="mt-6">Continue to delivery</SubmitButton>
+            <SubmitButton className="mt-6" onClick={checkTalinn}>
+              Continue to delivery
+            </SubmitButton>
             <ErrorMessage error={message} />
           </div>
         </form>

@@ -26,6 +26,8 @@ const Shipping: React.FC<ShippingProps> = ({
 }) => {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [over35, setOver35] = useState<boolean>()
+  const [isTalinn, setIsTalinn] = useState(false)
 
   const searchParams = useSearchParams()
   const router = useRouter()
@@ -59,9 +61,34 @@ const Shipping: React.FC<ShippingProps> = ({
   }
 
   useEffect(() => {
+    window.localStorage.clear()
+  }, [])
+
+  useEffect(() => {
+    if (window.localStorage.getItem("Talinn")) {
+      console.log("estonia")
+      setIsTalinn(true)
+    } else {
+      setIsTalinn(false)
+    }
+  }, [isOpen])
+
+  useEffect(() => {
     setIsLoading(false)
     setError(null)
   }, [isOpen])
+
+  useEffect(() => {
+    if (cart.total) {
+      if (cart.total / 100 >= 35) {
+        setOver35(true)
+        console.log("over 35")
+      } else {
+        setOver35(false)
+        console.log("not over")
+      }
+    }
+  }, [])
 
   return (
     <div className="bg-white">
@@ -103,35 +130,77 @@ const Shipping: React.FC<ShippingProps> = ({
               {availableShippingMethods ? (
                 availableShippingMethods.map((option) => {
                   return (
-                    <RadioGroup.Option
-                      key={option.id}
-                      value={option.id}
-                      className={clx(
-                        "flex items-center justify-between text-small-regular cursor-pointer py-4 border rounded-rounded px-8 mb-2 hover:shadow-borders-interactive-with-active",
-                        {
-                          "border-ui-border-interactive":
-                            option.id ===
-                            cart.shipping_methods[0]?.shipping_option_id,
-                        }
-                      )}
-                    >
-                      <div className="flex items-center gap-x-4">
-                        <Radio
-                          checked={
-                            option.id ===
-                            cart.shipping_methods[0]?.shipping_option_id
-                          }
-                        />
-                        <span className="text-base-regular">{option.name}</span>
-                      </div>
-                      <span className="justify-self-end text-ui-fg-base">
-                        {formatAmount({
-                          amount: option.amount!,
-                          region: cart?.region,
-                          includeTaxes: false,
-                        })}
-                      </span>
-                    </RadioGroup.Option>
+                    <>
+                      {over35 && isTalinn
+                        ? option.name === "Debol Free Shipping" && (
+                            <RadioGroup.Option
+                              key={option.id}
+                              value={option.id}
+                              className={clx(
+                                "flex items-center justify-between text-small-regular cursor-pointer py-4 border rounded-rounded px-8 mb-2 hover:shadow-borders-interactive-with-active",
+                                {
+                                  "border-ui-border-interactive":
+                                    option.id ===
+                                    cart.shipping_methods[0]
+                                      ?.shipping_option_id,
+                                }
+                              )}
+                            >
+                              <div className="flex items-center gap-x-4">
+                                <Radio
+                                  checked={
+                                    option.id ===
+                                    cart.shipping_methods[0]?.shipping_option_id
+                                  }
+                                />
+                                <span className="text-base-regular">
+                                  {option.name}
+                                </span>
+                              </div>
+                              <span className="justify-self-end text-ui-fg-base">
+                                {formatAmount({
+                                  amount: option.amount!,
+                                  region: cart?.region,
+                                  includeTaxes: false,
+                                })}
+                              </span>
+                            </RadioGroup.Option>
+                          )
+                        : option.name !== "Debol Free Shipping" && (
+                            <RadioGroup.Option
+                              key={option.id}
+                              value={option.id}
+                              className={clx(
+                                "flex items-center justify-between text-small-regular cursor-pointer py-4 border rounded-rounded px-8 mb-2 hover:shadow-borders-interactive-with-active",
+                                {
+                                  "border-ui-border-interactive":
+                                    option.id ===
+                                    cart.shipping_methods[0]
+                                      ?.shipping_option_id,
+                                }
+                              )}
+                            >
+                              <div className="flex items-center gap-x-4">
+                                <Radio
+                                  checked={
+                                    option.id ===
+                                    cart.shipping_methods[0]?.shipping_option_id
+                                  }
+                                />
+                                <span className="text-base-regular">
+                                  {option.name}
+                                </span>
+                              </div>
+                              <span className="justify-self-end text-ui-fg-base">
+                                {formatAmount({
+                                  amount: option.amount!,
+                                  region: cart?.region,
+                                  includeTaxes: false,
+                                })}
+                              </span>
+                            </RadioGroup.Option>
+                          )}
+                    </>
                   )
                 })
               ) : (
