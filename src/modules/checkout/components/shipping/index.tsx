@@ -26,8 +26,9 @@ const Shipping: React.FC<ShippingProps> = ({
 }) => {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
-  const [over35, setOver35] = useState<boolean>()
+  const [over35, setOver35] = useState(false)
   const [isTalinn, setIsTalinn] = useState(false)
+  const [freeDelivery, setFreeDelivery] = useState(false)
 
   const searchParams = useSearchParams()
   const router = useRouter()
@@ -68,6 +69,8 @@ const Shipping: React.FC<ShippingProps> = ({
     if (window.localStorage.getItem("Talinn")) {
       console.log("estonia")
       setIsTalinn(true)
+
+      setFreeDelivery(isTalinn && over35)
     } else {
       setIsTalinn(false)
     }
@@ -131,7 +134,7 @@ const Shipping: React.FC<ShippingProps> = ({
                 availableShippingMethods.map((option) => {
                   return (
                     <>
-                      {over35 && isTalinn
+                      {freeDelivery
                         ? option.name === "Debol Free Shipping" && (
                             <RadioGroup.Option
                               key={option.id}
