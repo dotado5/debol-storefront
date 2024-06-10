@@ -99,7 +99,7 @@ const Login = ({ setCurrentView }: Props) => {
         cookiePolicy={"single_host_origin"}
         className="font-bold text-black"
       /> */}
-      <GoogleLogin
+      {/* <GoogleLogin
         onSuccess={(credentialResponse) => {
           const responseDecoded = jwtDecode(
             credentialResponse.credential ? credentialResponse.credential : ""
@@ -110,7 +110,7 @@ const Login = ({ setCurrentView }: Props) => {
         onError={() => {
           console.log("Login Failed")
         }}
-      />
+      /> */}
 
       <ErrorMessage error={news} />
 
