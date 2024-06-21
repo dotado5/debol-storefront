@@ -4,7 +4,7 @@ import { Region } from "@medusajs/medusa"
 import { PricedProduct } from "@medusajs/medusa/dist/types/pricing"
 import { Button } from "@medusajs/ui"
 import { isEqual } from "lodash"
-import { useParams } from "next/navigation"
+import { useParams, useRouter } from "next/navigation"
 import { useEffect, useMemo, useRef, useState } from "react"
 
 import { useIntersection } from "@lib/hooks/use-in-view"
@@ -14,6 +14,7 @@ import OptionSelect from "@modules/products/components/option-select"
 
 import MobileActions from "../mobile-actions"
 import ProductPrice from "../product-price"
+import axios from "axios"
 
 type ProductActionsProps = {
   product: PricedProduct
@@ -33,6 +34,9 @@ export default function ProductActions({
 }: ProductActionsProps) {
   const [options, setOptions] = useState<Record<string, string>>({})
   const [isAdding, setIsAdding] = useState(false)
+  const [hasTubers, setHasTubers] = useState<boolean>()
+  const [whatsappMessage, setWhatsappMessage] = useState<boolean>()
+  const router = useRouter()
 
   const countryCode = useParams().countryCode as string
 
@@ -112,15 +116,60 @@ export default function ProductActions({
   const handleAddToCart = async () => {
     if (!variant?.id) return null
 
-    setIsAdding(true)
+    if (product.collection?.title === "Tubers and Plantains") {
+      await setHasTubers(true)
+    } else {
+      setIsAdding(true)
 
-    await addToCart({
-      variantId: variant.id,
-      quantity: 1,
-      countryCode,
-    })
+      await addToCart({
+        variantId: variant.id,
+        quantity: 1,
+        countryCode,
+      })
+    }
 
     setIsAdding(false)
+  }
+
+  const backToCart = () => {
+    setHasTubers(false)
+    // router.back()
+  }
+
+  const sendWhatsAppMessage = async () => {
+    setWhatsappMessage(true)
+    const accountSid = process.env.TWILIO_ACCOUNT_SID // Your Twilio account SID
+    const authToken = process.env.TWILIO_ACCOUNT_AUTHTOKEN // Your Twilio auth token
+
+    const messageBody = `Hi I would like to order this product: ${product.title}`
+
+    try {
+      const response = await axios.post(
+        `https://api.twilio.com/2010-04-01/Accounts/${accountSid}/Messages.json`,
+        new URLSearchParams({
+          To: "whatsapp:+2348034643978", // Business owner's WhatsApp number
+          From: "whatsapp:+14155238886", // Your Twilio WhatsApp number
+          Body: messageBody,
+        }),
+        {
+          auth: {
+            username: accountSid ? accountSid : "",
+            password: authToken ? authToken : "",
+          },
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+        }
+      )
+
+      console.log("Message sent:", response.data)
+      setWhatsappMessage(false)
+    } catch (error) {
+      console.error("Error sending message:", error)
+      setWhatsappMessage(false)
+    }
+
+    console.log("Whatsapp Message")
   }
 
   return (
@@ -173,6 +222,39 @@ export default function ProductActions({
           show={!inView}
         />
       </div>
+
+      {hasTubers && (
+        <div className="w-[400px] ">
+          <div className="overlay"></div>
+          <div className="popup">
+            <div className="popup-content">
+              <h2>Dear Customer</h2>
+              <p className="font-bold w-[400px] text-center">
+                Products in the Tuber and Plantain collection can only be
+                ordered via whatsapp
+              </p>
+              <div className="flex gap-2 mx-[11%]">
+                <button
+                  onClick={backToCart}
+                  className="bg-[#007bff] hover:bg-[#0056b3]"
+                >
+                  Go back to Cart
+                </button>
+                <button
+                  onClick={sendWhatsAppMessage}
+                  className="bg-green-700 hover:bg-green-950"
+                >
+                  {whatsappMessage ? (
+                    <div className="spinner"></div>
+                  ) : (
+                    "Go to Whatsapp"
+                  )}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   )
 }

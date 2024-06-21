@@ -63,7 +63,6 @@ export default async function CheckoutForm({
           <Shipping
             cart={cart}
             availableShippingMethods={availableShippingMethods}
-            customer={customer}
           />
         </div>
 

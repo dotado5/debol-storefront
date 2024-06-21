@@ -62,27 +62,6 @@ const Addresses = ({
   useEffect(() => {
     // console.log(cart)
     notify()
-
-    async function check() {
-      const titles = cart?.items
-        ? await Promise.all(cart.items.map(async (item) => item.title))
-        : []
-
-      await collections.map((collection: ProductCollectionWithPreviews) => {
-        collection.products.map((product: ProductPreviewType) => {
-          // console.log(titles, "titles")
-          cart?.items.map(async (item) => {
-            if (item.title === product.title) {
-              if (collection.title === "Tubers and Plantains") {
-                setHasTubers(true)
-              }
-            }
-          })
-        })
-      })
-    }
-
-    check()
   }, [])
 
   useEffect(() => {
@@ -107,20 +86,13 @@ const Addresses = ({
     }
   }, [hasTubers])
 
-  const backToCart = () => {
-    setHasTubers(false)
-    router.back()
-  }
-
-  const goToWhatsApp = () => {}
-
   function checkTalinn() {
     console.log("checkTal")
     if (window.localStorage.getItem("Talinn")) {
     }
   }
 
-  return !hasTubers ? (
+  return (
     <div className="bg-white">
       <ToastContainer position="top-center" />
 
@@ -251,33 +223,6 @@ const Addresses = ({
         </div>
       )}
       <Divider className="mt-8" />
-    </div>
-  ) : (
-    <div className="w-[400px] ">
-      <div className="overlay"></div>
-      <div className="popup">
-        <div className="popup-content">
-          <h2>Dear Customer</h2>
-          <p className="font-bold w-[400px] text-center">
-            Products in the Tuber and Plantain collection can only be ordered
-            via whatsapp
-          </p>
-          <div className="flex gap-2 mx-[11%]">
-            <button
-              onClick={backToCart}
-              className="bg-[#007bff] hover:bg-[#0056b3]"
-            >
-              Go back to Cart
-            </button>
-            <button
-              onClick={goToWhatsApp}
-              className="bg-green-700 hover:bg-green-950"
-            >
-              Go to Whatsapp
-            </button>
-          </div>
-        </div>
-      </div>
     </div>
   )
 }
