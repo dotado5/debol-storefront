@@ -16,11 +16,24 @@ type InputProps = Omit<
   name: string
   topLabel?: string
   component: string
+  passValidation?: (pass: boolean) => void
+  confirmPassword?: (e: any, label: string) => void
 }
 // changePassword
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
   (
-    { type, name, label, touched, required, topLabel, component, ...props },
+    {
+      type,
+      name,
+      label,
+      touched,
+      required,
+      topLabel,
+      component,
+      passValidation,
+      confirmPassword,
+      ...props
+    },
     ref
   ) => {
     const [passRequirements, setPassRequirements] = useState({
@@ -35,7 +48,6 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     const [showPassword, setShowPassword] = useState(false)
     const [inputType, setInputType] = useState(type)
     const [validation, setValidation] = useState(false)
-    const [notEqual, setNotEqual] = useState(false)
     const [estoniaAddress, setEstonia] = useState(true)
 
     useEffect(() => {
@@ -51,6 +63,9 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     useImperativeHandle(ref, () => inputRef.current!)
 
     const validatePassword = async (e: any) => {
+      if (confirmPassword) {
+        confirmPassword(e, label)
+      }
       // Define your password requirements here
 
       if (component === "register" && label === "Password") {
@@ -79,21 +94,20 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             hasSpecialChar
         )
 
-        console.log(isValid)
+        if (passValidation) {
+          passValidation(
+            value.length >= minLength &&
+              hasUpperCase &&
+              hasLowerCase &&
+              hasNumber &&
+              hasSpecialChar
+          )
+        }
       }
 
-      if (label === "Confirm Password") {
-        comparePasswords(e.target.value)
-      }
-    }
-
-    function comparePasswords(text: string) {
-      let password = label === "Password" && text
-      let confirm = label === "Confirm Password" && text
-
-      if (password !== confirm) {
-        setNotEqual(!notEqual)
-      }
+      // if (label === "Confirm Password") {
+      //   comparePasswords(e.target.value)
+      // }
     }
 
     function passwordWarning() {
@@ -134,6 +148,8 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           event.target.value = event.target.value.slice(0, maxLength)
         }
       }
+
+      // if
     }
 
     function checkAddress(text: string) {
@@ -276,6 +292,17 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
               minLength={8}
               maxLength={8}
             />
+          ) : inputType === "email" ? (
+            <input
+              type={inputType}
+              name={name}
+              placeholder=" "
+              required={required}
+              className="pt-4 pb-1 block w-full h-11 px-4 mt-0 bg-ui-bg-field border rounded-md appearance-none focus:outline-none focus:ring-0 focus:shadow-borders-interactive-with-active border-ui-border-base hover:bg-ui-bg-field-hover"
+              {...props}
+              ref={inputRef}
+              style={{ textTransform: "lowercase" }}
+            />
           ) : (
             <input
               type={inputType}
@@ -305,11 +332,6 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             </button>
           )}
         </div>
-        {notEqual && (
-          <div className="absolute bottom-[-1.5em] text-red-600 z-[100001] text-sm">
-            Passwords do not match!
-          </div>
-        )}
       </div>
     )
   }

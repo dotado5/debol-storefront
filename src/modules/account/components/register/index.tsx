@@ -8,6 +8,7 @@ import { signUp } from "@modules/account/actions"
 import ErrorMessage from "@modules/checkout/components/error-message"
 import { SubmitButton } from "@modules/checkout/components/submit-button"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
+import { useEffect, useState } from "react"
 
 type Props = {
   setCurrentView: (view: LOGIN_VIEW) => void
@@ -15,8 +16,40 @@ type Props = {
 
 const Register = ({ setCurrentView }: Props) => {
   const [message, formAction] = useFormState(signUp, null)
+  const [validationPassed, setValidationPassed] = useState(false)
+  const [notEqual, setNotEqual] = useState(false)
+  const [passwords, setPasswords] = useState({ original: "", confirm: "" })
+  const [disabled, setDisabled] = useState(true)
 
   // console.log(formAction)
+
+  useEffect(() => {
+    if (passwords.confirm !== passwords.original) {
+      setNotEqual(true)
+    } else {
+      setNotEqual(false)
+    }
+
+    if (passwords.confirm === passwords.original && validationPassed) {
+      setDisabled(false)
+      // console.log(disabled)
+    } else {
+      setDisabled(true)
+      // console.log(disabled)
+    }
+  }, [passwords.confirm, passwords.original])
+
+  const comparePasswords = async (e: any, label: string) => {
+    const { value } = e.target
+
+    // console.log(value, label)
+    if (label === "Password") {
+      await setPasswords({ ...passwords, original: value })
+      setNotEqual(true)
+    } else if (label === "Confirm Password") {
+      await setPasswords({ ...passwords, confirm: value })
+    }
+  }
 
   return (
     <div className="max-w-sm flex flex-col items-center">
@@ -65,6 +98,8 @@ const Register = ({ setCurrentView }: Props) => {
             type="password"
             autoComplete="new-password"
             component={"register"}
+            passValidation={setValidationPassed}
+            confirmPassword={comparePasswords}
           />
           <Input
             label="Confirm Password"
@@ -73,7 +108,13 @@ const Register = ({ setCurrentView }: Props) => {
             type="password"
             autoComplete="new-password"
             component={"register"}
+            confirmPassword={comparePasswords}
           />
+          {notEqual && (
+            <div className="absolute bottom-[-1.5em] text-red-600 z-[100001] text-sm">
+              Passwords do not match!
+            </div>
+          )}
         </div>
         <ErrorMessage error={message} />
         <span className="text-center text-ui-fg-base text-small-regular mt-6">
@@ -94,7 +135,9 @@ const Register = ({ setCurrentView }: Props) => {
           </LocalizedClientLink>
           .
         </span>
-        <SubmitButton className="w-full mt-6">Join</SubmitButton>
+        <SubmitButton className="w-full mt-6" disabled={disabled}>
+          Join
+        </SubmitButton>
       </form>
       <span className="text-center text-ui-fg-base text-small-regular mt-6">
         Already a member?{" "}
