@@ -33,9 +33,11 @@ const Register = ({ setCurrentView }: Props) => {
     if (passwords.confirm === passwords.original && validationPassed) {
       setDisabled(false)
       // console.log(disabled)
+      // console.log(notEqual)
     } else {
       setDisabled(true)
       // console.log(disabled)
+      // console.log(notEqual)
     }
   }, [passwords.confirm, passwords.original])
 
@@ -45,7 +47,6 @@ const Register = ({ setCurrentView }: Props) => {
     // console.log(value, label)
     if (label === "Password") {
       await setPasswords({ ...passwords, original: value })
-      setNotEqual(true)
     } else if (label === "Confirm Password") {
       await setPasswords({ ...passwords, confirm: value })
     }
