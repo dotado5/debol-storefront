@@ -4,7 +4,7 @@ import { useCallback, useContext, useEffect, useMemo, useState } from "react"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { RadioGroup } from "@headlessui/react"
 import ErrorMessage from "@modules/checkout/components/error-message"
-import { Cart, PaymentSession } from "@medusajs/medusa"
+import { Cart } from "@medusajs/medusa"
 import { CheckCircleSolid, CreditCard } from "@medusajs/icons"
 import { Button, Container, Heading, Text, Tooltip, clx } from "@medusajs/ui"
 import { CardElement } from "@stripe/react-stripe-js"
@@ -103,38 +103,13 @@ const Payment = ({
     setError(null)
   }, [isOpen])
 
-  let everyPay: PaymentSession
-
-  useEffect(() => {
-    console.log(cart?.payment_sessions)
-
-    // if (cart?.total) {
-    //   everyPay = {
-    //     amount: cart?.total,
-    //     cart_id: cart?.id,
-    //     created_at: cart?.created_at,
-    //     data: {},
-    //     id: "ps_01J0AQN9601BWHM6QADBFGHRUG",
-    //     idempotency_key: cart.idempotency_key,
-    //     is_initiated: false,
-    //     is_selected: null,
-    //     payment_authorized_at: cart.payment_authorized_at,
-    //     provider_id: "everypay",
-    //     status: "pending",
-    //     updated_at: cart?.updated_at,
-    //   }
-    // }
-
-    // cart?.payment_sessions.push(ever)
-  }, [])
-
-  // console.log(
-  //   stripeReady,
-  //   isStripe,
-  //   cardComplete,
-  //   cart?.payment_session,
-  //   stripePromise
-  // )
+  console.log(
+    stripeReady,
+    isStripe,
+    cardComplete,
+    cart?.payment_session,
+    stripePromise
+  )
 
   return (
     <div className="bg-white">

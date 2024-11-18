@@ -71,7 +71,7 @@ export default async function CheckoutForm({
         </div>
 
         <div>
-          <Review cart={cart} customer={customer} />
+          <Review cart={cart} />
         </div>
       </div>
     </div>
