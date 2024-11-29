@@ -114,7 +114,11 @@ export async function middleware(request: NextRequest) {
 
   let redirectUrl = request.nextUrl.href
 
-  let response = NextResponse.redirect(redirectUrl, 307)
+  // let response = NextResponse.redirect(redirectUrl, 307)
+  let response: any;
+  if (request.nextUrl.pathname === "/") {
+    response = NextResponse.redirect(redirectUrl, 307)
+  }
 
   // If no country code is set, we redirect to the relevant region.
   if (!urlHasCountryCode && countryCode) {
