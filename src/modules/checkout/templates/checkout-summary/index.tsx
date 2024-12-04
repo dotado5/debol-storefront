@@ -30,12 +30,12 @@ const CheckoutSummary = async () => {
         >
           In your Cart
         </Heading>
-        <Divider className="my-6" />
-        <CartTotals data={cart} />
+        {/* <Divider className="my-6" />
+        <CartTotals data={cart} /> */}
         <ItemsPreviewTemplate region={cart?.region} items={cart?.items} />
-        <div className="my-6">
+        {/* <div className="my-6">
           <DiscountCode cart={cart} />
-        </div>
+        </div> */}
       </div>
     </div>
   )

@@ -4,6 +4,7 @@ import { PricedProduct } from "@medusajs/medusa/dist/types/pricing"
 import { getProductsList, getRegion } from "@lib/data"
 
 import ProductPreview from "../product-preview"
+import TranslationComponent from "@modules/Translator/component/translation"
 
 type RelatedProductsProps = {
   product: PricedProduct
@@ -64,10 +65,12 @@ export default async function RelatedProducts({
     <div className="product-page-constraint">
       <div className="flex flex-col items-center text-center mb-16">
         <span className="text-base-regular text-gray-600 mb-6">
-          Related products
+          <TranslationComponent query={"Related products"} />
         </span>
         <p className="text-2xl-regular text-ui-fg-base max-w-lg">
-          You might also want to check out these products.
+          <TranslationComponent
+            query={"You might also want to check out these products."}
+          />
         </p>
       </div>
 

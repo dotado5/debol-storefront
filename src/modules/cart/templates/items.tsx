@@ -1,5 +1,7 @@
+"use client"
 import { LineItem, Region } from "@medusajs/medusa"
 import { Heading, Table } from "@medusajs/ui"
+import TranslationComponent from "@modules/Translator/component/translation"
 
 import Item from "@modules/cart/components/item"
 import SkeletonLineItem from "@modules/skeletons/components/skeleton-line-item"
@@ -10,22 +12,31 @@ type ItemsTemplateProps = {
 }
 
 const ItemsTemplate = ({ items, region }: ItemsTemplateProps) => {
+  // console.log(items)
+  
+  
   return (
     <div>
       <div className="pb-3 flex items-center">
-        <Heading className="text-[2rem] leading-[2.75rem]">Cart</Heading>
+        <Heading className="text-[2rem] leading-[2.75rem]">
+          <TranslationComponent query={"Cart"} />
+        </Heading>
       </div>
       <Table>
         <Table.Header className="border-t-0">
           <Table.Row className="text-ui-fg-subtle txt-medium-plus">
-            <Table.HeaderCell className="!pl-0">Item</Table.HeaderCell>
+            <Table.HeaderCell className="!pl-0">
+              <TranslationComponent query={"Item"} />
+            </Table.HeaderCell>
             <Table.HeaderCell></Table.HeaderCell>
-            <Table.HeaderCell>Quantity</Table.HeaderCell>
+            <Table.HeaderCell>
+              <TranslationComponent query={"Quantity"} />
+            </Table.HeaderCell>
             <Table.HeaderCell className="hidden small:table-cell">
-              Price
+              <TranslationComponent query={"Price"} />
             </Table.HeaderCell>
             <Table.HeaderCell className="!pr-0 text-right">
-              Total
+              <TranslationComponent query={"Total"} />
             </Table.HeaderCell>
           </Table.Row>
         </Table.Header>

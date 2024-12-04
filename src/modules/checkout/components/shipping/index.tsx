@@ -14,6 +14,7 @@ import ErrorMessage from "@modules/checkout/components/error-message"
 import { setShippingMethod } from "@modules/checkout/actions"
 import { useRouter, useSearchParams, usePathname } from "next/navigation"
 import { useEffect, useState } from "react"
+import TranslationComponent from "@modules/Translator/component/translation"
 import axios from "axios"
 
 type ShippingProps = {
@@ -151,7 +152,7 @@ const Shipping: React.FC<ShippingProps> = ({
             }
           )}
         >
-          Delivery
+          <TranslationComponent query={"Delivery"} />
           {!isOpen && cart.shipping_methods.length > 0 && <CheckCircleSolid />}
         </Heading>
         {!isOpen &&
@@ -163,7 +164,7 @@ const Shipping: React.FC<ShippingProps> = ({
                 onClick={handleEdit}
                 className="text-ui-fg-interactive hover:text-ui-fg-interactive-hover"
               >
-                Edit
+                <TranslationComponent query={"Edit"} />
               </button>
             </Text>
           )}
@@ -268,7 +269,7 @@ const Shipping: React.FC<ShippingProps> = ({
             isLoading={isLoading}
             disabled={!cart.shipping_methods[0]}
           >
-            Continue to payment
+            <TranslationComponent query={"Continue to payment"} />
           </Button>
         </div>
       ) : (

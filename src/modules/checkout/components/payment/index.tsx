@@ -20,6 +20,7 @@ import {
   StripeContext,
   // stripePromise,
 } from "@modules/checkout/components/payment-wrapper"
+import TranslationComponent from "@modules/Translator/component/translation"
 import axios from "axios"
 import { generateRandomString } from "../shipping"
 import Link from "next/link"
@@ -227,7 +228,6 @@ const Payment = ({
 
     console.log(payment_reference, paidWithEveryPay, "everypay")
   }, [paidWithEveryPay])
-
   // console.log(
   //   stripeReady,
   //   isStripe,
@@ -239,7 +239,7 @@ const Payment = ({
   async function logSomething() {
     console.log(paidWithEveryPay)
   }
-
+  
   return (
     <div className="bg-white">
       <div className="flex flex-row items-center justify-between mb-6">
@@ -253,7 +253,7 @@ const Payment = ({
             }
           )}
         >
-          Payment
+          <TranslationComponent query={"Payment"} />
           {!isOpen && paymentReady && <CheckCircleSolid />}
         </Heading>
         {!isOpen && paymentReady && (
@@ -262,7 +262,7 @@ const Payment = ({
               onClick={handleEdit}
               className="text-ui-fg-interactive hover:text-ui-fg-interactive-hover"
             >
-              Edit
+              <TranslationComponent query={"Edit"} />
             </button>
           </Text>
         )}
@@ -296,7 +296,7 @@ const Payment = ({
             {isStripe && stripeReady && (
               <div className="mt-5 transition-all duration-150 ease-in-out">
                 <Text className="txt-medium-plus text-ui-fg-base mb-1">
-                  Enter your card details:
+                  <TranslationComponent query={"Enter your card details:"} />
                 </Text>
 
                 <CardElement
@@ -351,7 +351,7 @@ const Payment = ({
                 !paidWithEveryPay
               }
             >
-              Continue to review
+              <TranslationComponent query={"Continue to review"} />
             </Button>
           </div>
         ) : (
@@ -365,7 +365,7 @@ const Payment = ({
             <div className="flex items-start gap-x-1 w-full">
               <div className="flex flex-col w-1/3">
                 <Text className="txt-medium-plus text-ui-fg-base mb-1">
-                  Payment method
+                  <TranslationComponent query={"Payment method"} />
                 </Text>
                 <Text className="txt-medium text-ui-fg-subtle">
                   {paymentInfoMap[cart.payment_session.provider_id]?.title ||
@@ -381,7 +381,7 @@ const Payment = ({
               </div>
               <div className="flex flex-col w-1/3">
                 <Text className="txt-medium-plus text-ui-fg-base mb-1">
-                  Payment details
+                  <TranslationComponent query={"Payment details"} />
                 </Text>
                 <div className="flex gap-2 txt-medium text-ui-fg-subtle items-center">
                   <Container className="flex items-center h-7 w-fit p-2 bg-ui-button-neutral-hover">

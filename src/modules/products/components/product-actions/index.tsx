@@ -13,7 +13,7 @@ import Divider from "@modules/common/components/divider"
 import OptionSelect from "@modules/products/components/option-select"
 
 import MobileActions from "../mobile-actions"
-import ProductPrice from "../product-price"
+// import ProductPrice from "../product-price"
 import axios from "axios"
 
 type ProductActionsProps = {
@@ -195,7 +195,7 @@ export default function ProductActions({
           )}
         </div>
 
-        <ProductPrice product={product} variant={variant} region={region} />
+        {/* <ProductPrice product={product} variant={variant} region={region} /> */}
 
         <Button
           onClick={handleAddToCart}
