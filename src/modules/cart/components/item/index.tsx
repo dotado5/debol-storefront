@@ -6,7 +6,7 @@ import { Table, Text, clx } from "@medusajs/ui"
 import CartItemSelect from "@modules/cart/components/cart-item-select"
 import DeleteButton from "@modules/common/components/delete-button"
 import LineItemOptions from "@modules/common/components/line-item-options"
-import LineItemPrice from "@modules/common/components/line-item-price"
+// import LineItemPrice from "@modules/common/components/line-item-price"
 import LineItemUnitPrice from "@modules/common/components/line-item-unit-price"
 import Thumbnail from "@modules/products/components/thumbnail"
 import { updateLineItem } from "@modules/cart/actions"
@@ -97,7 +97,8 @@ const Item = ({ item, region, type = "full" }: ItemProps) => {
 
       {type === "full" && (
         <Table.Cell className="hidden small:table-cell">
-          <LineItemUnitPrice item={item} region={region} style="tight" />
+          {/* <LineItemUnitPrice item={item} region={region} style="tight" /> */}
+          
         </Table.Cell>
       )}
 
@@ -110,10 +111,10 @@ const Item = ({ item, region, type = "full" }: ItemProps) => {
           {type === "preview" && (
             <span className="flex gap-x-1 ">
               <Text className="text-ui-fg-muted">{item.quantity}x </Text>
-              <LineItemUnitPrice item={item} region={region} style="tight" />
+              {/* <LineItemUnitPrice item={item} region={region} style="tight" /> */}
             </span>
           )}
-          <LineItemPrice item={item} region={region} style="tight" />
+          {/* <LineItemPrice item={item} region={region} style="tight" /> */}
         </span>
       </Table.Cell>
     </Table.Row>

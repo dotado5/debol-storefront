@@ -1,5 +1,6 @@
 import { PricedProduct } from "@medusajs/medusa/dist/types/pricing"
 import { Heading, Text } from "@medusajs/ui"
+import TranslationComponent from "@modules/Translator/component/translation"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 
 type ProductInfoProps = {
@@ -15,15 +16,17 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
             href={`/collections/${product.collection.handle}`}
             className="text-medium text-ui-fg-muted hover:text-ui-fg-subtle"
           >
-            {product.collection.title}
+            <TranslationComponent query={product.collection.title} />
           </LocalizedClientLink>
         )}
         <Heading level="h2" className="text-3xl leading-10 text-ui-fg-base">
-          {product.title}
+          {product.title && <TranslationComponent query={product.title} />}
         </Heading>
 
         <Text className="text-medium text-ui-fg-subtle">
-          {product.description}
+          {product.description && (
+            <TranslationComponent query={product.description} />
+          )}
         </Text>
       </div>
     </div>

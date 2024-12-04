@@ -12,12 +12,14 @@ const ShippingAddress = ({
   checked,
   onChange,
   countryCode,
+  hasTalinn,
 }: {
   customer: Omit<Customer, "password_hash"> | null
   cart: Omit<Cart, "refundable_amount" | "refunded_total"> | null
   checked: boolean
   onChange: () => void
   countryCode: string
+  hasTalinn?: (pass: boolean) => void
 }) => {
   const [formData, setFormData] = useState({
     "shipping_address.first_name": cart?.shipping_address?.first_name || "",
@@ -114,6 +116,7 @@ const ShippingAddress = ({
           required
           component={""}
           type="text"
+          hasTalinn={hasTalinn}
         />
         <Input
           label="Company"

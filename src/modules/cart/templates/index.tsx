@@ -13,6 +13,7 @@ const CartTemplate = ({
   cart: CartWithCheckoutStep | null
   customer: Omit<Customer, "password_hash"> | null
 }) => {
+  
   return (
     <div className="py-12">
       <div className="content-container">

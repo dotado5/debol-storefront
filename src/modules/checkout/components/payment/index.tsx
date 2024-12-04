@@ -9,7 +9,7 @@ import { CheckCircleSolid, CreditCard } from "@medusajs/icons"
 import { Button, Container, Heading, Text, Tooltip, clx } from "@medusajs/ui"
 import { CardElement } from "@stripe/react-stripe-js"
 import { StripeCardElementOptions } from "@stripe/stripe-js"
-import { Elements } from "@stripe/react-stripe-js"
+// import { Elements } from "@stripe/react-stripe-js"
 
 import Divider from "@modules/common/components/divider"
 import Spinner from "@modules/common/icons/spinner"
@@ -18,8 +18,13 @@ import { setPaymentMethod } from "@modules/checkout/actions"
 import { paymentInfoMap } from "@lib/constants"
 import {
   StripeContext,
-  stripePromise,
+  // stripePromise,
 } from "@modules/checkout/components/payment-wrapper"
+import TranslationComponent from "@modules/Translator/component/translation"
+import axios from "axios"
+import { generateRandomString } from "../shipping"
+import Link from "next/link"
+import Image from "next/image"
 
 const Payment = ({
   cart,
@@ -30,6 +35,9 @@ const Payment = ({
   const [error, setError] = useState<string | null>(null)
   const [cardBrand, setCardBrand] = useState<string | null>(null)
   const [cardComplete, setCardComplete] = useState(false)
+  const [paymentMethods, setPaymentMethods] = useState<any[]>([])
+  const [paidWithEveryPay, setPaidWithEveryPay] = useState(false)
+  const [reInitiate, setReInitiate] = useState(false)
 
   const searchParams = useSearchParams()
   const router = useRouter()
@@ -103,14 +111,135 @@ const Payment = ({
     setError(null)
   }, [isOpen])
 
-  console.log(
-    stripeReady,
-    isStripe,
-    cardComplete,
-    cart?.payment_session,
-    stripePromise
-  )
+  useEffect(() => {
+    const API_username = process.env.NEXT_EVERY_PAY_API_USERNAME
+    const API_secret = process.env.NEXT_EVERY_PAY_API_SECRET
 
+    const encodedCredentials = Buffer.from(
+      `${API_username}:${API_secret}`
+    ).toString("base64")
+    setPaidWithEveryPay(true)
+
+    async function initiateEverypay() {
+      const url = "https://igw-demo.every-pay.com/api/v4/payments/oneoff"
+      const nonceString = await generateRandomString(13)
+      const orderReference = await generateRandomString(8)
+      // console.log(randomString)
+
+      const options = {
+        headers: {
+          Authorization: `Basic ${encodedCredentials}`,
+          "Content-Type": "application/json",
+        },
+      }
+
+      const data = {
+        // structured_reference: 5705872,
+        payment_description: "example.com 84005a6c",
+        account_name: "EUR3D1",
+        nonce: nonceString,
+        timestamp: new Date(),
+        amount: cart?.total && cart.total / 100,
+        order_reference: orderReference,
+        request_token: true,
+        token_agreement: "unscheduled",
+        email: cart && cart.email,
+        customer_ip: "53.62.137.190",
+        customer_url: "https://debol-storefront.vercel.app/",
+        locale: "et",
+        api_username: "636c0877bfc71ae4",
+        preferred_country: "EE",
+        billing_city: cart && cart.billing_address.city,
+        billing_country: "EE",
+        billing_line1: cart && cart.billing_address.address_1,
+        billing_line2: null,
+        billing_line3: null,
+        billing_postcode: 10145,
+        billing_state: "EE-37",
+        shipping_city: cart && cart.shipping_address?.city,
+        shipping_country: "EE",
+        shipping_line1: cart && cart.shipping_address?.address_1,
+        shipping_line2: null,
+        shipping_line3: null,
+        shipping_postcode: 10145,
+        shipping_state: "EE-37",
+        mobile_payment: true,
+        token_consent_agreed: true,
+        integration_details: {
+          integration: "Custom",
+          software: "eCommerce",
+          version: 2.1,
+        },
+      }
+
+      axios
+        .post(url, data, options)
+        .then(async (response) => {
+          console.log("paid", paidWithEveryPay)
+
+          console.log("payment", response.data)
+          await setPaymentMethods(response.data.payment_methods)
+        })
+        .catch((error) => {
+          console.log("error:" + error)
+        })
+    }
+
+    if (isOpen) {
+      initiateEverypay()
+    }
+  }, [isOpen, reInitiate, cart, paidWithEveryPay])
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search)
+    const payment_reference = params.get("payment_reference")
+
+    const API_username = process.env.NEXT_EVERY_PAY_API_USERNAME
+    const API_secret = process.env.NEXT_EVERY_PAY_API_SECRET
+    const encodedCredentials = Buffer.from(
+      `${API_username}:${API_secret}`
+    ).toString("base64")
+
+    const options = {
+      headers: {
+        Authorization: `Basic ${encodedCredentials}`,
+        "Content-Type": "application/json",
+      },
+    }
+
+    const checkUrl = `https://igw-demo.every-pay.com/api/v4/payments/${payment_reference}?api_username=${API_username}&detailed=false`
+
+    axios
+      .get(checkUrl, options)
+      .then(async (response) => {
+        console.log("paid", response.data)
+      })
+      .catch((error) => {
+        console.log("error:" + error)
+      })
+
+    if (payment_reference) {
+      setPaidWithEveryPay(true)
+
+      console.log(payment_reference)
+    } else {
+      setPaidWithEveryPay(false)
+    }
+
+    console.log(payment_reference, paidWithEveryPay, "everypay")
+  }, [paidWithEveryPay])
+  // console.log(
+  //   stripeReady,
+  //   isStripe,
+  //   cardComplete,
+  //   cart?.payment_session,
+  //   stripePromise
+  // )
+
+  async function logSomething() {
+    console.log(paidWithEveryPay)
+  }
+  
   return (
     <div className="bg-white">
       <div className="flex flex-row items-center justify-between mb-6">
@@ -124,7 +253,7 @@ const Payment = ({
             }
           )}
         >
-          Payment
+          <TranslationComponent query={"Payment"} />
           {!isOpen && paymentReady && <CheckCircleSolid />}
         </Heading>
         {!isOpen && paymentReady && (
@@ -133,7 +262,7 @@ const Payment = ({
               onClick={handleEdit}
               className="text-ui-fg-interactive hover:text-ui-fg-interactive-hover"
             >
-              Edit
+              <TranslationComponent query={"Edit"} />
             </button>
           </Text>
         )}
@@ -156,17 +285,18 @@ const Payment = ({
                       paymentSession={paymentSession}
                       key={paymentSession.id}
                       selectedPaymentOptionId={
-                        cart.payment_session?.provider_id || null
+                        paidWithEveryPay
+                          ? "every-pay"
+                          : cart.payment_session?.provider_id || null
                       }
                     />
                   )
                 })}
             </RadioGroup>
-
             {isStripe && stripeReady && (
               <div className="mt-5 transition-all duration-150 ease-in-out">
                 <Text className="txt-medium-plus text-ui-fg-base mb-1">
-                  Enter your card details:
+                  <TranslationComponent query={"Enter your card details:"} />
                 </Text>
 
                 <CardElement
@@ -183,17 +313,45 @@ const Payment = ({
                 {/* <Elements stripe={stripePromise}></Elements> */}
               </div>
             )}
-
+            <div>
+              <h2
+                className="mb-2 mt-4 text-sm "
+                // onClick={logSomething}
+              >
+                PAY WITH BANKLINKS
+              </h2>
+              <div className="grid grid-cols-4 gap-2">
+                {paymentMethods.length !== 0 &&
+                  paymentMethods
+                    .filter((method) => method.country_code === "EE")
+                    .map((method, index) => (
+                      <Link
+                        href={method.payment_link}
+                        key={index}
+                        className="text-sm flex flex-col items-center border border-black p-2"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={() => setReInitiate(!reInitiate)}
+                      >
+                        <Image src={method.logo_url} alt={""} />
+                        {method.display_name}
+                      </Link>
+                    ))}
+              </div>
+            </div>
             <ErrorMessage error={error} />
-
             <Button
               size="large"
               className="mt-6"
               onClick={handleSubmit}
               isLoading={isLoading}
-              disabled={(isStripe && !cardComplete) || !cart.payment_session}
+              disabled={
+                (isStripe && !cardComplete) ||
+                // !cart.payment_session ||
+                !paidWithEveryPay
+              }
             >
-              Continue to review
+              <TranslationComponent query={"Continue to review"} />
             </Button>
           </div>
         ) : (
@@ -207,7 +365,7 @@ const Payment = ({
             <div className="flex items-start gap-x-1 w-full">
               <div className="flex flex-col w-1/3">
                 <Text className="txt-medium-plus text-ui-fg-base mb-1">
-                  Payment method
+                  <TranslationComponent query={"Payment method"} />
                 </Text>
                 <Text className="txt-medium text-ui-fg-subtle">
                   {paymentInfoMap[cart.payment_session.provider_id]?.title ||
@@ -223,7 +381,7 @@ const Payment = ({
               </div>
               <div className="flex flex-col w-1/3">
                 <Text className="txt-medium-plus text-ui-fg-base mb-1">
-                  Payment details
+                  <TranslationComponent query={"Payment details"} />
                 </Text>
                 <div className="flex gap-2 txt-medium text-ui-fg-subtle items-center">
                   <Container className="flex items-center h-7 w-fit p-2 bg-ui-button-neutral-hover">
@@ -248,3 +406,5 @@ const Payment = ({
 }
 
 export default Payment
+
+// https://debol-storefront.vercel.app/?order_reference=84005a6c&payment_reference=19eff1c15ea9a2c3d41c413688baa345d38aa078e68490a2d3b637f0a1f7f1c1

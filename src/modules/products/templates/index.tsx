@@ -34,13 +34,13 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
       <div className="content-container flex flex-col small:flex-row small:items-start py-6 relative">
         <LocalizedClientLink
           href="/"
-          className="text-small-semi text-ui-fg-base flex items-center gap-x-2 uppercase flex-1 basis-0 ml-[-3em]"
+          className="text-small-semi text-ui-fg-base flex items-center gap-x-2 uppercase flex-1 basis-0 "
         >
           <ChevronDown className="rotate-90" size={16} />
-          <span className="mt-px hidden small:block txt-compact-plus text-ui-fg-subtle hover:text-ui-fg-base ">
+          <span className="mt-[0.2em] hidden small:block txt-compact-plus text-ui-fg-subtle hover:text-ui-fg-base ">
             Back
           </span>
-          <span className="mt-px block small:hidden txt-compact-plus text-ui-fg-subtle hover:text-ui-fg-base">
+          <span className="mt-[0.2em] block small:hidden txt-compact-plus text-ui-fg-subtle hover:text-ui-fg-base">
             Back
           </span>
         </LocalizedClientLink>

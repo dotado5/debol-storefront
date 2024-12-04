@@ -260,6 +260,19 @@ export async function getToken(credentials: StorePostAuthReq) {
     })
 }
 
+export async function getTokenByGoogleAuth(email: string) {
+
+    const headers = getMedusaHeaders(["customer"])
+
+  return medusaClient.customers
+    .retrieve(headers)
+    .then(({ customer }) => console.log(customer)
+    )
+    .catch((err) => null)
+
+
+}
+
 export async function authenticate(credentials: StorePostAuthReq) {
   const headers = getMedusaHeaders(["auth"])
 

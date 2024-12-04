@@ -1,4 +1,5 @@
 import { Text, clx } from "@medusajs/ui"
+import TranslationComponent from "@modules/Translator/component/translation"
 import * as AccordionPrimitive from "@radix-ui/react-accordion"
 import React from "react"
 
@@ -56,7 +57,10 @@ const Item: React.FC<AccordionItemProps> = ({
         <div className="flex flex-col">
           <div className="flex w-full items-center justify-between">
             <div className="flex items-center gap-4">
-              <Text className="text-ui-fg-subtle text-sm">{title}</Text>
+              <Text className="text-ui-fg-subtle text-sm">
+                {" "}
+                <TranslationComponent query={title} />
+              </Text>
             </div>
 
             <AccordionPrimitive.Trigger>
@@ -65,7 +69,7 @@ const Item: React.FC<AccordionItemProps> = ({
           </div>
           {subtitle && (
             <Text as="span" size="small" className="mt-1">
-              {subtitle}
+              <TranslationComponent query={subtitle} />
             </Text>
           )}
         </div>
@@ -78,7 +82,11 @@ const Item: React.FC<AccordionItemProps> = ({
         )}
       >
         <div className="inter-base-regular group-radix-state-closed:animate-accordion-close">
-          {description && <Text>{description}</Text>}
+          {description && (
+            <Text>
+              <TranslationComponent query={description} />
+            </Text>
+          )}
           <div className="w-full">{children}</div>
         </div>
       </AccordionPrimitive.Content>

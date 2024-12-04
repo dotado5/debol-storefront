@@ -50,7 +50,7 @@ const SliderBox = ({
           {buttonContent}
         </button>
       </div>
-      <Image
+      <img
         src={image}
         alt={""}
         className="absolute z-[10000001] right-0 bottom-0 w-[250px] h-[250px] medium:w-[500px] medium:h-[500px]"

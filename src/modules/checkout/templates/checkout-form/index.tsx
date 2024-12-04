@@ -1,3 +1,5 @@
+"use server"
+
 import Addresses from "@modules/checkout/components/addresses"
 import Shipping from "@modules/checkout/components/shipping"
 import Payment from "@modules/checkout/components/payment"
@@ -48,6 +50,14 @@ export default async function CheckoutForm({
   // get customer if logged in
   const customer = await getCustomer()
 
+  let hasTalinn: boolean = false
+
+  const setHasTalinn = (pass: boolean) => {
+    if (pass) {
+      hasTalinn = true
+    }
+  }
+
   return (
     <div>
       <div className="w-full grid grid-cols-1 gap-y-8">
@@ -56,6 +66,7 @@ export default async function CheckoutForm({
             cart={cart}
             customer={customer}
             collections={collections}
+            // hasTalinn={setHasTalinn}
           />
         </div>
 
@@ -63,6 +74,8 @@ export default async function CheckoutForm({
           <Shipping
             cart={cart}
             availableShippingMethods={availableShippingMethods}
+            hasTalinn={hasTalinn}
+            over={cart.total !== undefined ? cart.total / 100 > 35 : false}
           />
         </div>
 
@@ -71,7 +84,7 @@ export default async function CheckoutForm({
         </div>
 
         <div>
-          <Review cart={cart} />
+          <Review cart={cart} customer={customer} />
         </div>
       </div>
     </div>

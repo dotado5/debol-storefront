@@ -186,7 +186,7 @@ const EditAddress: React.FC<EditAddressProps> = ({
                 />
               </div>
               <Input
-                label="Province / State"
+                label="State / Province"
                 name="province"
                 autoComplete="address-level1"
                 defaultValue={address.province || undefined}
