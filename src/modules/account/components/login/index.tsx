@@ -8,9 +8,6 @@ import {
 } from "@modules/account/actions"
 import ErrorMessage from "@modules/checkout/components/error-message"
 import { SubmitButton } from "@modules/checkout/components/submit-button"
-// import { GoogleLogin } from "react-google-login"
-import { GoogleLogin } from "@react-oauth/google"
-import { jwtDecode } from "jwt-decode"
 import { useState } from "react"
 
 type Props = {
