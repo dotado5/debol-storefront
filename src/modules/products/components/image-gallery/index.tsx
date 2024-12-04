@@ -63,7 +63,7 @@ const ImageGallery = ({ images }: ImageGalleryProps) => {
         {images.map((image, index) => (
           <div
             key={index}
-            className="relative w-full h-full aspect-[29/34] flex items-center"
+            className="relative h-full aspect-[29/34] flex items-center"
           >
             {/* overflow-hidden bg-ui-bg-subtle w-full h-full aspect-[29/34] flex items-center*/}
             <ReactImageMagnify
@@ -83,7 +83,7 @@ const ImageGallery = ({ images }: ImageGalleryProps) => {
                   height: "100%",
                 },
               }}
-              className="galleryImage mx-auto h-auto max-h-[300px] object-contain"
+              className="galleryImage mx-auto  w-auto  object-contain"
             />
           </div>
         ))}

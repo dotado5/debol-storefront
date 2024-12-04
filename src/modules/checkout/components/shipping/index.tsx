@@ -14,18 +14,40 @@ import ErrorMessage from "@modules/checkout/components/error-message"
 import { setShippingMethod } from "@modules/checkout/actions"
 import { useRouter, useSearchParams, usePathname } from "next/navigation"
 import { useEffect, useState } from "react"
+import axios from "axios"
 
 type ShippingProps = {
   cart: Omit<Cart, "refundable_amount" | "refunded_total">
   availableShippingMethods: PricedShippingOption[] | null
+  hasTalinn: boolean
+  over: boolean
+}
+
+// utils.js
+export const generateRandomString = (length = 10) => {
+  const characters =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+  let result = ""
+  const charactersLength = characters.length
+  for (let i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength))
+  }
+  return result
 }
 
 const Shipping: React.FC<ShippingProps> = ({
   cart,
   availableShippingMethods,
+  hasTalinn,
+  over,
 }) => {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [over35, setOver35] = useState(false)
+  const [isTalinn, setIsTalinn] = useState(false)
+  const [freeDelivery, setFreeDelivery] = useState(false)
+  const [details, setDetails] =
+    useState<Omit<Cart, "refundable_amount" | "refunded_total">>()
 
   const searchParams = useSearchParams()
   const router = useRouter()
@@ -57,6 +79,59 @@ const Shipping: React.FC<ShippingProps> = ({
   const handleChange = (value: string) => {
     set(value)
   }
+
+  useEffect(() => {
+    async function setOver() {
+      if (cart.total) {
+        if (cart.total / 100 >= 35) {
+          await setOver35(true)
+          // console.log("over 35")
+        } else {
+          await setOver35(false)
+          // console.log("not over")
+        }
+      }
+    }
+
+    setOver()
+  }, [cart])
+
+  useEffect(() => {
+    // console.log("enterrr")
+
+    async function setDatas() {
+      if (window.localStorage.getItem("Talinn")?.length !== 0) {
+        console.log("estonia")
+        await setIsTalinn(true)
+
+        console.log(isTalinn, over)
+
+        await setFreeDelivery(
+          window.localStorage.getItem("Talinn")?.length !== 0 && over
+        )
+      } else {
+        setIsTalinn(false)
+      }
+
+      if (hasTalinn) {
+        await setIsTalinn(true)
+        await setFreeDelivery(isTalinn && over)
+      } else {
+        setIsTalinn(false)
+      }
+    }
+
+    async function setCart() {
+      if (cart) {
+        console.log(cart)
+
+        await setDetails(cart)
+      }
+    }
+
+    setDatas()
+    setCart()
+  }, [isOpen, cart, hasTalinn, isTalinn, over])
 
   useEffect(() => {
     setIsLoading(false)
@@ -103,35 +178,77 @@ const Shipping: React.FC<ShippingProps> = ({
               {availableShippingMethods ? (
                 availableShippingMethods.map((option) => {
                   return (
-                    <RadioGroup.Option
-                      key={option.id}
-                      value={option.id}
-                      className={clx(
-                        "flex items-center justify-between text-small-regular cursor-pointer py-4 border rounded-rounded px-8 mb-2 hover:shadow-borders-interactive-with-active",
-                        {
-                          "border-ui-border-interactive":
-                            option.id ===
-                            cart.shipping_methods[0]?.shipping_option_id,
-                        }
-                      )}
-                    >
-                      <div className="flex items-center gap-x-4">
-                        <Radio
-                          checked={
-                            option.id ===
-                            cart.shipping_methods[0]?.shipping_option_id
-                          }
-                        />
-                        <span className="text-base-regular">{option.name}</span>
-                      </div>
-                      <span className="justify-self-end text-ui-fg-base">
-                        {formatAmount({
-                          amount: option.amount!,
-                          region: cart?.region,
-                          includeTaxes: false,
-                        })}
-                      </span>
-                    </RadioGroup.Option>
+                    <>
+                      {freeDelivery
+                        ? option.name === "Debol Free Shipping" && (
+                            <RadioGroup.Option
+                              key={option.id}
+                              value={option.id}
+                              className={clx(
+                                "flex items-center justify-between text-small-regular cursor-pointer py-4 border rounded-rounded px-8 mb-2 hover:shadow-borders-interactive-with-active",
+                                {
+                                  "border-ui-border-interactive":
+                                    option.id ===
+                                    cart.shipping_methods[0]
+                                      ?.shipping_option_id,
+                                }
+                              )}
+                            >
+                              <div className="flex items-center gap-x-4">
+                                <Radio
+                                  checked={
+                                    option.id ===
+                                    cart.shipping_methods[0]?.shipping_option_id
+                                  }
+                                />
+                                <span className="text-base-regular">
+                                  {option.name}
+                                </span>
+                              </div>
+                              <span className="justify-self-end text-ui-fg-base">
+                                {formatAmount({
+                                  amount: option.amount!,
+                                  region: cart?.region,
+                                  includeTaxes: false,
+                                })}
+                              </span>
+                            </RadioGroup.Option>
+                          )
+                        : option.name !== "Debol Free Shipping" && (
+                            <RadioGroup.Option
+                              key={option.id}
+                              value={option.id}
+                              className={clx(
+                                "flex items-center justify-between text-small-regular cursor-pointer py-4 border rounded-rounded px-8 mb-2 hover:shadow-borders-interactive-with-active",
+                                {
+                                  "border-ui-border-interactive":
+                                    option.id ===
+                                    cart.shipping_methods[0]
+                                      ?.shipping_option_id,
+                                }
+                              )}
+                            >
+                              <div className="flex items-center gap-x-4">
+                                <Radio
+                                  checked={
+                                    option.id ===
+                                    cart.shipping_methods[0]?.shipping_option_id
+                                  }
+                                />
+                                <span className="text-base-regular">
+                                  {option.name}
+                                </span>
+                              </div>
+                              <span className="justify-self-end text-ui-fg-base">
+                                {formatAmount({
+                                  amount: option.amount!,
+                                  region: cart?.region,
+                                  includeTaxes: false,
+                                })}
+                              </span>
+                            </RadioGroup.Option>
+                          )}
+                    </>
                   )
                 })
               ) : (
