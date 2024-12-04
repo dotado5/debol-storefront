@@ -135,28 +135,31 @@ const CartDropdown = ({
                                   </LocalizedClientLink>
                                 </h3>
                                 <LineItemOptions variant={item.variant} />
-                                <span>Quantity: {item.quantity}</span>
+                                <span>
+                                  <TranslationComponent query={"Quantity"} />:{" "}
+                                  {item.quantity}
+                                </span>
                               </div>
                               <div className="flex justify-end">
-                                <LineItemPrice
+                                {/* <LineItemPrice
                                   region={cartState.region}
                                   item={item}
                                   style="tight"
-                                />
+                                /> */}
                               </div>
                             </div>
                           </div>
                           <DeleteButton id={item.id} className="mt-1">
-                            Remove
+                            <TranslationComponent query={"Remove"} />
                           </DeleteButton>
                         </div>
                       </div>
                     ))}
                 </div>
                 <div className="p-4 flex flex-col gap-y-4 text-small-regular">
-                  <div className="flex items-center justify-between">
+                  {/* <div className="flex items-center justify-between">
                     <span className="text-ui-fg-base font-semibold">
-                      Subtotal{" "}
+                      <TranslationComponent query={"Subtotal"} />
                       <span className="font-normal">(excl. taxes)</span>
                     </span>
                     <span className="text-large-semi">
@@ -166,10 +169,10 @@ const CartDropdown = ({
                         includeTaxes: false,
                       })}
                     </span>
-                  </div>
+                  </div> */}
                   <LocalizedClientLink href="/cart" passHref>
                     <Button className="w-full" size="large">
-                      Go to cart
+                      <TranslationComponent query={"Go to cart"} />
                     </Button>
                   </LocalizedClientLink>
                 </div>

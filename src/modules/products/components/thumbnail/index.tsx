@@ -59,11 +59,7 @@ const ImageOrPlaceholder = ({
     //   width={225}
     //   height={225}
     // />
-    <Image
-      src={image}
-      alt=""
-      className="w-auto h-auto object-contain mx-auto"
-    />
+    <img src={image} alt="" className="w-auto h-auto object-contain mx-auto" />
   ) : (
     <div className="w-full h-full absolute inset-0 flex items-center justify-center">
       <PlaceholderImage size={size === "small" ? 16 : 24} />

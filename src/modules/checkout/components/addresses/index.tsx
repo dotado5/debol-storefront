@@ -18,10 +18,8 @@ import { SubmitButton } from "../submit-button"
 import { useFormState } from "react-dom"
 import ErrorMessage from "../error-message"
 import compareAddresses from "@lib/util/compare-addresses"
-import { useEffect, useState } from "react"
-import { ProductCollectionWithPreviews, ProductPreviewType } from "types/global"
-import React from "react"
-import { ToastContainer, toast } from "react-toastify"
+import React, { useState, useEffect } from "react"
+import { ProductCollectionWithPreviews } from "types/global"
 import "react-toastify/dist/ReactToastify.css"
 
 const Addresses = ({
@@ -40,7 +38,6 @@ const Addresses = ({
   const pathname = usePathname()
   const params = useParams()
   const [hasTubers, setHasTubers] = useState<boolean>()
-
   const countryCode = params.countryCode as string
 
   const isOpen = searchParams.get("step") === "address"
@@ -50,21 +47,28 @@ const Addresses = ({
       ? compareAddresses(cart?.shipping_address, cart?.billing_address)
       : true
   )
+ 
+  // const countriesInRegion = useMemo(
+  //   () => cart?.region.countries.map((c: any) => c.iso_2),
+  //   [cart?.region]
+  // )
 
+  // check if customer has saved addresses that are in the current region
+ 
   const handleEdit = () => {
     router.push(pathname + "?step=address")
   }
 
   const [message, formAction] = useFormState(setAddresses, null)
-  const notify = () =>
-    toast(
-      "Orders above 35 euros are delivered for free for delivery orders in Talinn"
-    )
+  // const notify = () =>
+  //   toast(
+  //     "Orders above 35 euros are delivered for free for delivery orders in Talinn"
+  //   )
 
-  useEffect(() => {
-    // console.log(cart)
-    notify()
-  }, [])
+  // useEffect(() => {
+  //   // console.log(cart)
+  //   notify()
+  // }, [])
 
   useEffect(() => {
     window.localStorage.setItem("Talinn", "")
@@ -100,9 +104,7 @@ const Addresses = ({
 
   return (
     <div className="bg-white">
-      <ToastContainer position="top-center" />
-
-      <div className="flex flex-row items-center justify-between mb-6">
+     <div className="flex flex-row items-center justify-between mb-6">
         <Heading
           level="h2"
           className="flex flex-row text-3xl-regular gap-x-2 items-baseline"

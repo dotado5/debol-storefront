@@ -3,11 +3,11 @@ import { Text } from "@medusajs/ui"
 import { ProductPreviewType } from "types/global"
 
 import { retrievePricedProductById } from "@lib/data"
-import { getProductPrice } from "@lib/util/get-product-price"
+// import { getProductPrice } from "@lib/util/get-product-price"
 import { Region } from "@medusajs/medusa"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import Thumbnail from "../thumbnail"
-import PreviewPrice from "./price"
+// import PreviewPrice from "./price"
 import TranslationComponent from "@modules/Translator/component/translation"
 
 export default async function ProductPreview({
@@ -28,10 +28,10 @@ export default async function ProductPreview({
     return null
   }
 
-  const { cheapestPrice } = getProductPrice({
-    product: pricedProduct,
-    region,
-  })
+  // const { cheapestPrice } = getProductPrice({
+  //   product: pricedProduct,
+  //   region,
+  // })
 
   return (
     <LocalizedClientLink
@@ -48,9 +48,9 @@ export default async function ProductPreview({
           <Text className="text-ui-fg-subtle">
             <TranslationComponent query={productPreview.title} />
           </Text>
-          <div className="flex items-center gap-x-2">
+          {/* <div className="flex items-center gap-x-2">
             {cheapestPrice && <PreviewPrice price={cheapestPrice} />}
-          </div>
+          </div> */}
         </div>
       </div>
     </LocalizedClientLink>

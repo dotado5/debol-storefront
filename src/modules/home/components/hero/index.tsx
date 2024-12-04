@@ -26,7 +26,7 @@ const Hero = async ({
       {
         title: <TranslationComponent query={"WhatsApp: "} />,
         text: <TranslationComponent query={" +372 53851546"} />,
-        icon: <Image src={whatsApp} alt={""} />,
+        icon: <img src={whatsApp} alt={""} />,
       },
       {
         title: <TranslationComponent query={"Location: "} />,
@@ -35,7 +35,7 @@ const Hero = async ({
             query={"Tartu address: Sobra 41, 51013 Tartu"}
           />
         ),
-        icon: <Image src={location} alt={""} />,
+        icon: <img src={location} alt={""} />,
       },
       {
         title: <TranslationComponent query={"Location: "} />,
@@ -46,7 +46,7 @@ const Hero = async ({
             }
           />
         ),
-        icon: <Image src={location} alt={""} />,
+        icon: <img src={location} alt={""} />,
       },
     ],
   }

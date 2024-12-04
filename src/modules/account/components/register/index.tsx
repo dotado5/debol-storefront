@@ -8,7 +8,9 @@ import { signUp } from "@modules/account/actions"
 import ErrorMessage from "@modules/checkout/components/error-message"
 import { SubmitButton } from "@modules/checkout/components/submit-button"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
+import TranslationComponent from "@modules/Translator/component/translation"
 import { useEffect, useState } from "react"
+
 
 type Props = {
   setCurrentView: (view: LOGIN_VIEW) => void
@@ -119,34 +121,37 @@ const Register = ({ setCurrentView }: Props) => {
         </div>
         <ErrorMessage error={message} />
         <span className="text-center text-ui-fg-base text-small-regular mt-6">
-          By creating an account, you agree to Debol&apos;s Store&apos;s
+          <TranslationComponent
+            query={
+              "By creating an account, you agree to Debol&apos;s Store&apos;s"
+            }
+          />
           <LocalizedClientLink
             href="/content/privacy-policy"
             className="underline"
           >
-            {" "}
-            Privacy Policy
+            <TranslationComponent query={"Privacy Policy"} />
           </LocalizedClientLink>
-          and{" "}
+          <TranslationComponent query={"and"} />
           <LocalizedClientLink
             href="/content/terms-of-use"
             className="underline"
           >
-            Terms of Use
+            <TranslationComponent query={"Terms of Use"} />
           </LocalizedClientLink>
           .
         </span>
-        <SubmitButton className="w-full mt-6" disabled={disabled}>
-          Join
+        <SubmitButton className="w-full mt-6">
+          <TranslationComponent query={"Join"} />
         </SubmitButton>
       </form>
       <span className="text-center text-ui-fg-base text-small-regular mt-6">
-        Already a member?{" "}
+        <TranslationComponent query={"Already a member?"} />
         <button
           onClick={() => setCurrentView(LOGIN_VIEW.SIGN_IN)}
           className="underline"
         >
-          Sign in
+          <TranslationComponent query={"Sign in"} />
         </button>
         .
       </span>

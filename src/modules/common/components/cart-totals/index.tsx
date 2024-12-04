@@ -4,6 +4,7 @@ import { formatAmount } from "@lib/util/prices"
 import { InformationCircleSolid } from "@medusajs/icons"
 import { Cart, Order } from "@medusajs/medusa"
 import { Tooltip } from "@medusajs/ui"
+import TranslationComponent from "@modules/Translator/component/translation"
 import React from "react"
 
 type CartTotalsProps = {
@@ -33,7 +34,7 @@ const CartTotals: React.FC<CartTotalsProps> = ({ data }) => {
       <div className="flex flex-col gap-y-2 txt-medium text-ui-fg-subtle ">
         <div className="flex items-center justify-between">
           <span className="flex gap-x-1 items-center">
-            Subtotal
+            <TranslationComponent query={"Subtotal"} />
             <Tooltip content="Cart total excluding shipping and taxes.">
               <InformationCircleSolid color="var(--fg-muted)" />
             </Tooltip>
@@ -42,7 +43,9 @@ const CartTotals: React.FC<CartTotalsProps> = ({ data }) => {
         </div>
         {!!discount_total && (
           <div className="flex items-center justify-between">
-            <span>Discount</span>
+            <span>
+              <TranslationComponent query={"Discount"} />
+            </span>
             <span className="text-ui-fg-interactive">
               - {getAmount(discount_total)}
             </span>
@@ -50,24 +53,32 @@ const CartTotals: React.FC<CartTotalsProps> = ({ data }) => {
         )}
         {!!gift_card_total && (
           <div className="flex items-center justify-between">
-            <span>Gift card</span>
+            <span>
+              <TranslationComponent query={"Gift card"} />
+            </span>
             <span className="text-ui-fg-interactive">
               - {getAmount(gift_card_total)}
             </span>
           </div>
         )}
         <div className="flex items-center justify-between">
-          <span>Shipping</span>
+          <span>
+            <TranslationComponent query={"Shipping"} />
+          </span>
           <span>{getAmount(shipping_total)}</span>
         </div>
         <div className="flex justify-between">
-          <span className="flex gap-x-1 items-center ">Taxes</span>
+          <span className="flex gap-x-1 items-center ">
+            <TranslationComponent query={"Taxes"} />
+          </span>
           <span>{getAmount(tax_total)}</span>
         </div>
       </div>
       <div className="h-px w-full border-b border-gray-200 my-4" />
       <div className="flex items-center justify-between text-ui-fg-base mb-2 txt-medium ">
-        <span>Total</span>
+        <span>
+          <TranslationComponent query={"Total"} />
+        </span>
         <span className="txt-xlarge-plus">{getAmount(total)}</span>
       </div>
       <div className="h-px w-full border-b border-gray-200 mt-4" />

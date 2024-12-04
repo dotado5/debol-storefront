@@ -63,8 +63,7 @@ const Login = ({ setCurrentView }: Props) => {
         <ErrorMessage error={message} />
         <SubmitButton className="w-full mt-6">Sign in</SubmitButton>
       </form>
-      <p className="my-[2em]">OR</p>
-      {/* google signin */}
+      {/* <p className="my-[2em]">OR</p>
       <a
         type="button"
         href={`http://localhost:9000/admin/auth/google?returnAccessToken=true`}
@@ -86,7 +85,7 @@ const Login = ({ setCurrentView }: Props) => {
           ></path>
         </svg>
         Sign in with Google
-      </a>
+      </a> */}
 
       {/* <GoogleLogin
         clientId="44428971545-rh81erp247fo3p3dali2c052p0psu77l.apps.googleusercontent.com"

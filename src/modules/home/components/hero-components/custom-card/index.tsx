@@ -76,7 +76,7 @@ export const BonusCard = () => {
         </p>
       </div>
       <div className=" z-[10000001] place-items-end mt-[4em]">
-        <Image
+        <img
           src={advertWoman}
           alt={""}
           className=" ml-0 rounded-br-2xl mt-0 "
